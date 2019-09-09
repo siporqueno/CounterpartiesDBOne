@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>The following entry has been successfully added to the database:</h1>
+<p th:text="'Counterparty short name: ' + ${counterpartyProduct.counterpartyShortName}" />
+<p th:text="'Product short name: ' + ${counterpartyProduct.productShortName}" />
+<p th:text="'Is Buyer?: ' + ${counterpartyProduct.isBuyer}" />
+<p th:text="'Is Seller?: ' + ${counterpartyProduct.isSeller}" />
+<p th:text="'Is Consumer?: ' + ${counterpartyProduct.isConsumer}" />
+<p th:text="'Is Producer?: ' + ${counterpartyProduct.isProducer}" />
+<p th:text="'Quantity: ' + ${counterpartyProduct.quantity}" />
+
+<a href="/demo/add-through-view">Submit another CounterpartyProduct</a>
+<a href="index">Home</a>
+
+</body>
+</html>
