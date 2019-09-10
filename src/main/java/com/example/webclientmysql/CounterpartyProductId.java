@@ -6,6 +6,14 @@ public class CounterpartyProductId implements Serializable {
     private String counterpartyShortName;
     private String productShortName;
 
+    public CounterpartyProductId(String counterpartyShortName, String productShortName) {
+        this.counterpartyShortName=counterpartyShortName;
+        this.productShortName=productShortName;
+    }
+
+    public CounterpartyProductId() {
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
