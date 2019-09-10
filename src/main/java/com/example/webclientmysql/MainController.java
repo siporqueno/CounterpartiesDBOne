@@ -3,6 +3,7 @@ package com.example.webclientmysql;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller    // This means that this class is a Controller
@@ -46,22 +47,30 @@ public class MainController {
         return "allcounterpartyproducts";
     }
 
-    @GetMapping(path = "/add-through-view")
+    @GetMapping(value = "/add-through-view")
     public String formAddCounterpartyProduct(Model model) {
         model.addAttribute("copro", new CounterpartyProduct());
+        model.addAttribute("headerCp", "Form to add Counterparty Product");
         return "add-cp-through-view";
     }
 
-    @PostMapping(path = "/show-through-view")
+    @PostMapping(value = "/show-through-view")
     public String submitCounterpartyProduct(@ModelAttribute CounterpartyProduct counterpartyProduct) {
-        counterpartyProductRepository.save(counterpartyProduct);
+        counterpartyProduct = counterpartyProductRepository.save(counterpartyProduct);
+        return "redirect:/demo/submitted/" + counterpartyProduct.getCounterpartyShortName() + "/" + counterpartyProduct.getProductShortName();
+    }
+
+    @GetMapping(value = "/submitted/{co}/{pro}")
+    public String showSubmittedCounterpartyProduct(ModelMap model, @PathVariable("co") String counterpartyShortName, @PathVariable("pro") String productShortName) {
+        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(new CounterpartyProductId(counterpartyShortName, productShortName)).orElse(new CounterpartyProduct());
+        model.addAttribute("counterpartyProduct", counterpartyProduct);
         return "submitted-through-view";
     }
 
     @GetMapping(path = "/delete-through-view")
     public String formDeleteById(Model model) {
         model.addAttribute("coproId", new CounterpartyProductId());
-        return "delete-cp-through-view";
+        return "do-th-on-cp-by-cpid-view";
     }
 
     @PostMapping(path = "/show-deleted-through-view")

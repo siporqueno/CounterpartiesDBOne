@@ -8,7 +8,7 @@
 
 </head>
 <body>
-<h1>Form to add Counterparty Product</h1>
+<h1 th:text="${headerCp}">!!!</h1>
 <form action="#" th:action="@{/demo/show-through-view}" th:object="${copro}" method="post">
     <p>Counterparty short name: <input type="text" th:field="*{counterpartyShortName}"/></p>
     <p>Product short name: <input type="text" th:field="*{productShortName}"/></p>
