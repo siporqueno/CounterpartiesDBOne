@@ -64,20 +64,27 @@ public class MainController {
     public String showSubmittedCounterpartyProduct(ModelMap model, @PathVariable("co") String counterpartyShortName, @PathVariable("pro") String productShortName) {
         CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(new CounterpartyProductId(counterpartyShortName, productShortName)).orElse(new CounterpartyProduct());
         model.addAttribute("counterpartyProduct", counterpartyProduct);
-        return "submitted-through-view";
+        model.addAttribute("headerCp", "The following entry has been successfully added to the database:");
+        return "cp-processed-view";
     }
 
     @GetMapping(path = "/delete-through-view")
     public String formDeleteById(Model model) {
+        model.addAttribute("headerCpId", "Form to delete Counterparty Product");
         model.addAttribute("coproId", new CounterpartyProductId());
-        return "do-th-on-cp-by-cpid-view";
+        model.addAttribute("btn", "Delete");
+        return "do-sth-on-cp-by-cpid-view";
     }
 
     @PostMapping(path = "/show-deleted-through-view")
-    public String submitDeletedById(@ModelAttribute CounterpartyProductId counterpartyProductId) {
-//        Optional<CounterpartyProduct> counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId);
+    public String submitDeletedById(Model model, @ModelAttribute("coproId") CounterpartyProductId counterpartyProductId) {
+        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
         counterpartyProductRepository.deleteById(counterpartyProductId);
-        return "deleted-through-view";
+        model.addAttribute("counterpartyProduct", counterpartyProduct);
+        model.addAttribute("headerCp", "The following entry has been successfully deleted from the database:");
+//        return "deleted-through-view";
+        return "cp-processed-view";
+
     }
 
     @GetMapping(path = "")

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>The following entry has been successfully added to the database:</h1>
+<h1 th:text="${headerCp}">!!!</h1>
 <p th:text="'Counterparty short name: ' + ${counterpartyProduct.counterpartyShortName}" />
 <p th:text="'Product short name: ' + ${counterpartyProduct.productShortName}" />
 <p th:text="'Is Buyer?: ' + ${counterpartyProduct.isBuyer}" />
@@ -15,7 +15,8 @@
 <p th:text="'Quantity: ' + ${counterpartyProduct.quantity}" />
 
 <a href="/demo/add-through-view">Submit another CounterpartyProduct</a>
-<a href="index">Home</a>
+<a href="/demo/delete-through-view">Delete another CounterpartyProduct</a>
+<a href="/demo">Home</a>
 
 </body>
 </html>
