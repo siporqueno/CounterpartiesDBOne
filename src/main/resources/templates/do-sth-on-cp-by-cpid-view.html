@@ -6,7 +6,8 @@
 </head>
 <body>
 <h1 th:text="${headerCpId}">!!!</h1>
-<form action="#" th:action="@{/demo/show-deleted-through-view}" th:object="${coproId}" method="post">
+<!--<form action="#" th:action="@{/demo/${}show-deleted-through-view}" th:object="${coproId}" method="post">-->
+<form th:object="${coproId}" method="post">
     <p>Counterparty short name: <input type="text" th:field="*{counterpartyShortName}" /></p>
     <p>Product short name: <input type="text" th:field="*{productShortName}" /></p>
     <p><input type="submit" th:value="${btn}" /> <input type="reset" value="Reset" /></p>

@@ -76,8 +76,8 @@ public class MainController {
         return "do-sth-on-cp-by-cpid-view";
     }
 
-    @PostMapping(path = "/show-deleted-through-view")
-    public String submitDeletedById(Model model, @ModelAttribute("coproId") CounterpartyProductId counterpartyProductId) {
+    @PostMapping(path = "/delete-through-view")
+    public String displayDeletedById(Model model, @ModelAttribute("coproId") CounterpartyProductId counterpartyProductId) {
         CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
         counterpartyProductRepository.deleteById(counterpartyProductId);
         model.addAttribute("counterpartyProduct", counterpartyProduct);
@@ -85,6 +85,24 @@ public class MainController {
 //        return "deleted-through-view";
         return "cp-processed-view";
 
+    }
+
+    @GetMapping(path = "/find-copro-by-coproid-view")
+    public String formFindById(Model model) {
+        model.addAttribute("headerCpId", "Form to search Counterparty Product by Counterparty and Product");
+        model.addAttribute("coproId", new CounterpartyProductId());
+        model.addAttribute("btn", "Search");
+        return "do-sth-on-cp-by-cpid-view";
+    }
+
+    @PostMapping(path = "/find-copro-by-coproid-view")
+    public String displayFoundById(Model model, @ModelAttribute("coproId") CounterpartyProductId counterpartyProductId) {
+        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
+//        counterpartyProductRepository.deleteById(counterpartyProductId);
+        model.addAttribute("counterpartyProduct", counterpartyProduct);
+        model.addAttribute("headerCp", "The following entry has been found in the database:");
+//        return "deleted-through-view";
+        return "cp-processed-view";
     }
 
     @GetMapping(path = "")
