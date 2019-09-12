@@ -6,13 +6,36 @@
 </head>
 <body>
 <h1 th:text="${headerCp}">!!!</h1>
-<p th:text="'Counterparty short name: ' + ${counterpartyProduct.counterpartyShortName}" />
-<p th:text="'Product short name: ' + ${counterpartyProduct.productShortName}" />
-<p th:text="'Is Buyer?: ' + ${counterpartyProduct.isBuyer}" />
-<p th:text="'Is Seller?: ' + ${counterpartyProduct.isSeller}" />
-<p th:text="'Is Consumer?: ' + ${counterpartyProduct.isConsumer}" />
-<p th:text="'Is Producer?: ' + ${counterpartyProduct.isProducer}" />
-<p th:text="'Quantity: ' + ${counterpartyProduct.quantity}" />
+<table border="1">
+    <tr>
+        <td>Counterparty short name:</td><td th:text="${counterpartyProduct.counterpartyShortName}">Name</td>
+    </tr>
+    <tr>
+        <td>Product short name:</td><td th:text="${counterpartyProduct.productShortName}">Product</td>
+    </tr>
+    <tr>
+        <td>Is Buyer?:</td><td th:text="${counterpartyProduct.isBuyer}">Buyer?</td>
+    </tr>
+    <tr>
+        <td>Is Seller?:</td><td th:text="${counterpartyProduct.isSeller}">Seller?</td>
+    </tr>
+    <tr>
+        <td>Is Consumer?:</td><td th:text="${counterpartyProduct.isConsumer}">Consumer?</td>
+    </tr>
+    <tr>
+        <td>Is Producer?:</td><td th:text="${counterpartyProduct.isProducer}">Producer?</td>
+    </tr>
+    <tr>
+        <td>Quantity:</td><td th:text="${counterpartyProduct.quantity}">Quantity</td>
+    </tr>
+</table>
+<!--<p th:text="'Counterparty short name: ' + ${counterpartyProduct.counterpartyShortName}" />-->
+<!--<p th:text="'Product short name: ' + ${counterpartyProduct.productShortName}" />-->
+<!--<p th:text="'Is Buyer?: ' + ${counterpartyProduct.isBuyer}" />-->
+<!--<p th:text="'Is Seller?: ' + ${counterpartyProduct.isSeller}" />-->
+<!--<p th:text="'Is Consumer?: ' + ${counterpartyProduct.isConsumer}" />-->
+<!--<p th:text="'Is Producer?: ' + ${counterpartyProduct.isProducer}" />-->
+<!--<p th:text="'Quantity: ' + ${counterpartyProduct.quantity}" />-->
 
 <p><a href="/demo/add-through-view">Submit another CounterpartyProduct</a></p>
 <p><a href="/demo/delete-through-view">Delete another CounterpartyProduct</a></p>
