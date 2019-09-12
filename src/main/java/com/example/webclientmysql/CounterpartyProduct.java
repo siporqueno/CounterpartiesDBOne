@@ -13,7 +13,7 @@ public class CounterpartyProduct {
     @Column(name = "ProductShortName")
     private String productShortName;
     @Column(name = "IsBuyer")
-    private String isBuyer;
+    private boolean isBuyer;
     @Column(name = "IsSeller")
     private String isSeller;
     @Column(name = "IsConsumer")
@@ -39,12 +39,12 @@ public class CounterpartyProduct {
         this.productShortName = productShortName;
     }
 
-    public String getIsBuyer() {
+    public boolean getIsBuyer() {
         return isBuyer;
     }
 
-    public void setIsBuyer(String buyer) {
-        isBuyer = buyer;
+    public void setIsBuyer(boolean isBuyer) {
+        this.isBuyer = isBuyer;
     }
 
     public String getIsSeller() {
