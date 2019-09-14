@@ -15,11 +15,11 @@ public class CounterpartyProduct {
     @Column(name = "IsBuyer")
     private boolean isBuyer;
     @Column(name = "IsSeller")
-    private String isSeller;
+    private boolean isSeller;
     @Column(name = "IsConsumer")
-    private String isConsumer;
+    private boolean isConsumer;
     @Column(name = "IsProducer")
-    private String isProducer;
+    private boolean isProducer;
     @Column(name = "Quantity")
     private String quantity;
 
@@ -47,28 +47,28 @@ public class CounterpartyProduct {
         this.isBuyer = isBuyer;
     }
 
-    public String getIsSeller() {
+    public boolean getIsSeller() {
         return isSeller;
     }
 
-    public void setIsSeller(String seller) {
-        isSeller = seller;
+    public void setIsSeller(boolean isSeller) {
+        this.isSeller = isSeller;
     }
 
-    public String getIsConsumer() {
+    public boolean getIsConsumer() {
         return isConsumer;
     }
 
-    public void setIsConsumer(String consumer) {
-        isConsumer = consumer;
+    public void setIsConsumer(boolean isConsumer) {
+        this.isConsumer = isConsumer;
     }
 
-    public String getIsProducer() {
+    public boolean getIsProducer() {
         return isProducer;
     }
 
-    public void setIsProducer(String producer) {
-        isProducer = producer;
+    public void setIsProducer(boolean isProducer) {
+        this.isProducer = isProducer;
     }
 
     public String getQuantity() {

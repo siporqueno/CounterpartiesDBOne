@@ -16,8 +16,8 @@ public class MainController {
     @GetMapping(path = "/add") // Map ONLY GET Requests
     public @ResponseBody
     String addNewCounterpartyProduct(@RequestParam String counterpartyShortName, @RequestParam String productShortName,
-                                     @RequestParam boolean isBuyer, @RequestParam String isSeller,
-                                     @RequestParam String isConsumer, @RequestParam String isProducer,
+                                     @RequestParam boolean isBuyer, @RequestParam boolean isSeller,
+                                     @RequestParam boolean isConsumer, @RequestParam boolean isProducer,
                                      @RequestParam String quantity) {
         // @ResponseBody means the returned String is the response, not a view counterpartyShortName
         // @RequestParam means it is a parameter from the GET or POST request
