@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1 th:text="${headerCpId}">!!!</h1>
+<form th:object="${coproId}" method="post">
+    <table>
+        <tr>
+            <td>Counterparty short name:</td><td><input type="text" th:field="*{counterpartyShortName}"/></td>
+        </tr>
+        <tr>
+            <td>Product short name:</td><td><input type="text" th:field="*{productShortName}" /></td>
+        </tr>
+    </table>
+    <ul>
+        <li><input type="radio" name="searchOption" value="ByCounterparty">
+        <label>By Counterpary</label></li>
+        <li><input type="radio" name="searchOption" value="ByProduct" checked>
+        <label>By Product</label></li>
+        <li><input type="radio" name="searchOption" value="ByCounterpartyOrProduct">
+        <label>By Counterparty Or Product</label></li>
+        <li><input type="radio" name="searchOption" value="ByCounterpartyAndProduct">
+        <label>By Counterparty And Product</label></li>
+    </ul>
+    <p><input type="submit" th:value="${btn}" /> <input type="reset" value="Reset" /></p>
+</form>
+<a href="/demo">Home</a>
+</body>
+</html>
