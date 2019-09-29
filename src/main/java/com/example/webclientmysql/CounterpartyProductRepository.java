@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CounterpartyProductRepository extends CrudRepository<CounterpartyProduct, CounterpartyProductId> {
 
+
 }
