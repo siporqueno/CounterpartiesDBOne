@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller    // This means that this class is a Controller
 @RequestMapping(path = "/demo") // This means URL's start with /demo (after Application path)
 public class MainController {
@@ -43,7 +46,9 @@ public class MainController {
 
     @GetMapping(path = "/alltoview")
     public String getAllCounterpartyProductsToView(Model model) {
+        model.addAttribute("name", "Kanechno Vasya");
         model.addAttribute("counterpartyproducts", counterpartyProductRepository.findAll());
+        model.addAttribute("headerCp", "Here are all the entries in the database:");
         return "allcounterpartyproducts";
     }
 
@@ -103,6 +108,44 @@ public class MainController {
         model.addAttribute("headerCp", "The following entry has been found in the database:");
 //        return "deleted-through-view";
         return "cp-processed-view";
+    }
+
+    @GetMapping(path = "/find-copro-by-co-or-pro-etc-view")
+    public String formFindByCoEtc(Model model) {
+        model.addAttribute("headerCpId", "Form to search Counterparty Product by Counterparty or Product etc.");
+        model.addAttribute("coproId", new CounterpartyProductId());
+        model.addAttribute("btn", "Search");
+        return "form-to-find-cp-by-co-or-pro-etc";
+    }
+
+    @PostMapping(path = "/find-copro-by-co-or-pro-etc-view")
+    public String displayFoundByCoEtc(Model model, @ModelAttribute("coproId") CounterpartyProductId counterpartyProductId, @RequestParam("searchOption") String searchOption) {
+        String counterpartyShortName = counterpartyProductId.getCounterpartyShortName();
+        String productShortName = counterpartyProductId.getProductShortName();
+        System.out.println(counterpartyShortName+"  "+productShortName);
+        List<CounterpartyProduct> counterpartyProducts=new ArrayList<>();
+        switch (searchOption) {
+            case "ByCounterparty":
+                counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortName(counterpartyShortName);
+                break;
+            case "ByProduct":
+                counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByProductShortName(productShortName);
+                break;
+            case "ByCounterpartyOrProduct":
+                counterpartyProducts=counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortNameOrProductShortName(counterpartyShortName, productShortName);
+                break;
+            case "ByCounterpartyAndProduct":
+                counterpartyProducts=counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortNameAndProductShortName(counterpartyShortName, productShortName);
+                break;
+            default:
+                System.out.println("Default option in switch");
+        }
+//        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
+//        model.addAttribute("counterpartyProduct", counterpartyProduct);
+        model.addAttribute("counterpartyproducts", counterpartyProducts);
+        model.addAttribute("headerCp", "Entry(ies) found in the database:");
+//        System.out.println(searchOption);
+        return "allcounterpartyproducts";
     }
 
     @GetMapping(path = "")
