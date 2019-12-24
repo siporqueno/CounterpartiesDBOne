@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Discurso del borracho</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+</head>
+
+
+<div th:fragment="navigationOne(activeTab)">
+    <div class="row">
+        <div class="col">
+<!--            <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+            <nav class="navbar navbar-expand navbar-light bg-light">
+<!--When you put navbar-expand without any -sm/-lg etc. it does not switch to vertical on telephone!!!-->
+                <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
+                <!-- After I commented the above row I saw the button logout on mobile device -->
+                <ul class="navbar-nav">
+                    <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active  font-weight-bold' : ''}">
+                        <a class="nav-link" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item" th:classappend="${activeTab == 'About' ? 'active font-weight-bold' : ''}" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" th:href="@{/about}">About</a>
+                    </li>
+                    <li class="nav-item" th:classappend="${activeTab == 'Speech' ? 'active font-weight-bold' : ''}" sec:authorize="isAuthenticated()">
+                        <a class="nav-link" th:href="@{/tellme}">Speech</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link btn btn-success" th:href="@{/tellme}">Login</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="POST">
+                            <input type="submit" class="btn btn-danger" value="Logout"/>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<div th:fragment="navigationTwo(activeTab)">
+    <div class="row">
+        <div class="col">
+            <ul class="nav nav-tabs justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${activeTab == 'Home' ? 'active' : ''}" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:classappend="${activeTab == 'About' ? 'active' : ''}" th:href="@{/about}">About</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:classappend="${activeTab == 'Speech' ? 'active' : ''}" th:href="@{/tellme}">Speech</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link btn btn-success" th:href="@{/tellme}">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="POST">
+                        <input type="submit" class="btn btn-danger" value="Logout"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div th:fragment="navigationThree(activeTab)">
+    <div class="row">
+        <div class="col">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${activeTab == 'Home' ? 'active' : ''}" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:classappend="${activeTab == 'About' ? 'active' : ''}" th:href="@{/about}">About</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:classappend="${activeTab == 'Speech' ? 'active' : ''}" th:href="@{/tellme}">Speech</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link btn btn-success" th:href="@{/tellme}">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="POST">
+                        <input type="submit" class="btn btn-danger" value="Logout"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div th:fragment="navigationFour(activeTab)">
+    <div class="row">
+        <div class="col">
+            <!--            <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+            <nav class="navbar navbar-expand navbar-light bg-primary">
+                <!--When you put navbar-expand without any -sm/-lg etc. it does not switch to vertical on telephone!!!-->
+                <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
+                <!-- After I commented the above row I saw the button logout on mobile device -->
+                <ul class="navbar-nav">
+                    <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active font-weight-bold' : ''}">
+                        <a class="nav-link text-white" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item" th:classappend="${activeTab == 'About' ? 'active font-weight-bold' : ''}" sec:authorize="isAuthenticated()">
+                        <a class="nav-link text-white" th:href="@{/about}">About</a>
+                    </li>
+                    <li class="nav-item" th:classappend="${activeTab == 'Speech' ? 'active font-weight-bold' : ''}" sec:authorize="isAuthenticated()">
+                        <a class="nav-link text-white" th:href="@{/tellme}">Speech</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link btn btn-success text-white" th:href="@{/tellme}">Login</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="POST">
+                            <input type="submit" class="btn btn-danger" value="Logout"/>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
