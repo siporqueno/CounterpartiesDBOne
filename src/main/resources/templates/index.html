@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>CoPro Database</title>
 <!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -24,6 +24,8 @@ font-family : sans- serif;
 <body>
 
 <div class="container">
+    <div th:replace="~{navigation :: navigationThree(Home)}"/>
+
     <h2>Welcome to database of counterparties and products</h2>
     <p>Get list of all CounterpartyProducts <a href="/demo/alltoview">here</a></p>
     <p>Add CounterpartyProduct <a href="/demo/add-through-view">here</a></p>

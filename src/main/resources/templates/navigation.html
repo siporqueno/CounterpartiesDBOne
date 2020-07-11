@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Discurso del borracho</title>
@@ -25,10 +25,10 @@
                     <li class="nav-item" th:classappend="${activeTab == 'Home' ? 'active  font-weight-bold' : ''}">
                         <a class="nav-link" th:href="@{/}">Home</a>
                     </li>
-                    <li class="nav-item" th:classappend="${activeTab == 'About' ? 'active font-weight-bold' : ''}" sec:authorize="isAuthenticated()">
+                    <li class="nav-item" th:classappend="${activeTab == 'About' ? 'active font-weight-bold' : ''}" sec:authorize="">
                         <a class="nav-link" th:href="@{/about}">About</a>
                     </li>
-                    <li class="nav-item" th:classappend="${activeTab == 'Speech' ? 'active font-weight-bold' : ''}" sec:authorize="isAuthenticated()">
+                    <li class="nav-item" th:classappend="${activeTab == 'Speech' ? 'active font-weight-bold' : ''}" sec:authorize="">
                         <a class="nav-link" th:href="@{/tellme}">Speech</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAnonymous()">
@@ -74,13 +74,16 @@
         <div class="col">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activeTab == 'Home' ? 'active' : ''}" th:href="@{/}">Home</a>
+                    <a class="nav-link" th:classappend="${activeTab == 'Home' ? 'active' : ''}" th:href="@{/demo}">Home</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:classappend="${activeTab == 'About' ? 'active' : ''}" th:href="@{/about}">About</a>
+                    <a class="nav-link" th:classappend="${activeTab == 'CoPro' ? 'active' : ''}" th:href="@{/demo/copro}">CoPro</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:classappend="${activeTab == 'Speech' ? 'active' : ''}" th:href="@{/tellme}">Speech</a>
+                    <a class="nav-link" th:classappend="${activeTab == 'Co' ? 'active' : ''}" th:href="@{/demo/co}">Co</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:classappend="${activeTab == 'Pro' ? 'active' : ''}" th:href="@{/demo/pro}">Pro</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAnonymous()">
                     <a class="nav-link btn btn-success" th:href="@{/tellme}">Login</a>

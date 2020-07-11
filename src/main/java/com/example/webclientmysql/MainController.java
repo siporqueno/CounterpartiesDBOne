@@ -152,4 +152,9 @@ public class MainController {
     public String goHome() {
         return "index";
     }
+
+    @GetMapping(path = "/copro")
+    public String goToCoPro(){
+        return "co-pro";
+    }
 }
