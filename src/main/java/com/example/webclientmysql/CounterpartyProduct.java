@@ -7,20 +7,20 @@ import javax.persistence.*;
 @Table(name = "counterparties_products")
 public class CounterpartyProduct {
     @Id
-    @Column(name = "CounterpartyShortName")
+    @Column(name = "counterparty_short_name")
     private String counterpartyShortName;
     @Id
-    @Column(name = "ProductShortName")
+    @Column(name = "product_short_name")
     private String productShortName;
-    @Column(name = "IsBuyer")
+    @Column(name = "is_buyer")
     private boolean isBuyer;
-    @Column(name = "IsSeller")
+    @Column(name = "is_seller")
     private boolean isSeller;
-    @Column(name = "IsConsumer")
+    @Column(name = "is_consumer")
     private boolean isConsumer;
-    @Column(name = "IsProducer")
+    @Column(name = "is_producer")
     private boolean isProducer;
-    @Column(name = "Quantity")
+    @Column(name = "quantity")
     private String quantity;
 
     public String getCounterpartyShortName() {
