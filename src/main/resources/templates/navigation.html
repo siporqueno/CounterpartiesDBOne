@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
 </head>
 
@@ -81,16 +81,14 @@
                 </li>
                 <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                     <a class="nav-link dropdown-toggle" th:classappend="${activeTab == 'CoPro' ? 'active' : ''}"
-                       data-toggle="dropdown" th:href="@{/demo/copro}" role="button"
+                       data-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">CoPro</a>
-                    <!--<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Dropdown</a>-->
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
+                        <a class="dropdown-item" th:href="@{/demo/alltoview}">All CoPros</a>
+                        <a class="dropdown-item" th:href="@{/demo/add-through-view}">Add CoPro</a>
+                        <a class="dropdown-item" th:href="@{/demo/delete-through-view}">Delete CoPro</a>
+                        <a class="dropdown-item" th:href="@{/demo/find-copro-by-coproid-view}">Find CoPro by CoProId</a>
+                        <a class="dropdown-item" th:href="@{/demo/find-copro-by-co-or-pro-etc-view}">Find CoPro by Co/Pro/CoOrPro/CoAndPro</a>
                     </div>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">

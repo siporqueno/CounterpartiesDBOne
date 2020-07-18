@@ -1,41 +1,47 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>CoPro Database</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 </head>
 <body>
-<!--<p th:text="'Hello, ' + ${name} + '!'" />-->
 
-<h1 th:text="${headerCp}"> My first html heading </h1>
+<div class="container">
+    <div th:replace="~{navigation :: navigationThree(CoPro)}"/>
 
-<!--<h2> My second html heading </h2>-->
+    <!--    <table border="1">-->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Counterparty</th>
+            <th scope="col">Product</th>
+            <th scope="col">Buyer?</th>
+            <th scope="col">Seller?</th>
+            <th scope="col">Consumer?</th>
+            <th scope="col">Producer?</th>
+            <th scope="col">Quantity?</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="counterpartyproduct : ${counterpartyproducts}">
+            <td th:text="${counterpartyproduct.counterpartyShortName}">1</td>
+            <td th:text="${counterpartyproduct.productShortName}">Text ...</td>
+            <td th:text="${counterpartyproduct.isBuyer}">Text ...</td>
+            <td th:text="${counterpartyproduct.isSeller}">Text ...</td>
+            <td th:text="${counterpartyproduct.isConsumer}">Text ...</td>
+            <td th:text="${counterpartyproduct.isProducer}">Text ...</td>
+            <td th:text="${counterpartyproduct.quantity}">Text ...</td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/demo">Home</a>
+</div>
 
-<!--<p>-->
-<!--    My first html paragraph.-->
-<!--</p>-->
-
-<table border="1">
-    <tr>
-        <th>Counterparty</th>
-        <th>Product</th>
-        <th>Buyer?</th>
-        <th>Seller?</th>
-        <th>Consumer?</th>
-        <th>Producer?</th>
-        <th>Quantity?</th>
-    </tr>
-
-    <tr th:each="counterpartyproduct : ${counterpartyproducts}">
-        <td th:text="${counterpartyproduct.counterpartyShortName}">1</td>
-        <td th:text="${counterpartyproduct.productShortName}">Text ...</td>
-        <td th:text="${counterpartyproduct.isBuyer}">Text ...</td>
-        <td th:text="${counterpartyproduct.isSeller}">Text ...</td>
-        <td th:text="${counterpartyproduct.isConsumer}">Text ...</td>
-        <td th:text="${counterpartyproduct.isProducer}">Text ...</td>
-        <td th:text="${counterpartyproduct.quantity}">Text ...</td>
-    </tr>
-</table>
-<a href="/demo">Home</a>
+<script src="/js/popper.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
