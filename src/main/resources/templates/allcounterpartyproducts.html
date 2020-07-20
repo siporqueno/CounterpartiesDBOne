@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>CoPro Database</title>
+    <title>CoPro list</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -10,34 +10,40 @@
 <body>
 
 <div class="container">
+    <div th:replace="~{navigation :: navigationOne(CoPro)}"/>
     <div th:replace="~{navigation :: navigationThree(CoPro)}"/>
 
-    <!--    <table border="1">-->
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Counterparty</th>
-            <th scope="col">Product</th>
-            <th scope="col">Buyer?</th>
-            <th scope="col">Seller?</th>
-            <th scope="col">Consumer?</th>
-            <th scope="col">Producer?</th>
-            <th scope="col">Quantity?</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="counterpartyproduct : ${counterpartyproducts}">
-            <td th:text="${counterpartyproduct.counterpartyShortName}">1</td>
-            <td th:text="${counterpartyproduct.productShortName}">Text ...</td>
-            <td th:text="${counterpartyproduct.isBuyer}">Text ...</td>
-            <td th:text="${counterpartyproduct.isSeller}">Text ...</td>
-            <td th:text="${counterpartyproduct.isConsumer}">Text ...</td>
-            <td th:text="${counterpartyproduct.isProducer}">Text ...</td>
-            <td th:text="${counterpartyproduct.quantity}">Text ...</td>
-        </tr>
-        </tbody>
-    </table>
-    <a href="/demo">Home</a>
+    <div class="row">
+        <div class="col">
+            <!--    <table border="1">-->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Counterparty</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Buyer?</th>
+                    <th scope="col">Seller?</th>
+                    <th scope="col">Consumer?</th>
+                    <th scope="col">Producer?</th>
+                    <th scope="col">Quantity?</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="counterpartyproduct : ${counterpartyproducts}">
+                    <td th:text="${counterpartyproduct.counterpartyShortName}">1</td>
+                    <td th:text="${counterpartyproduct.productShortName}">Text ...</td>
+                    <td th:text="${counterpartyproduct.isBuyer}">Text ...</td>
+                    <td th:text="${counterpartyproduct.isSeller}">Text ...</td>
+                    <td th:text="${counterpartyproduct.isConsumer}">Text ...</td>
+                    <td th:text="${counterpartyproduct.isProducer}">Text ...</td>
+                    <td th:text="${counterpartyproduct.quantity}">Text ...</td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="/demo">Home</a>
+        </div>
+    </div>
+
 </div>
 
 <script src="/js/popper.js"></script>
