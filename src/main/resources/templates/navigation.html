@@ -23,19 +23,19 @@
                 <ul class="navbar-nav nav-pills">
                     <li class="nav-item">
                         <a class="nav-link" th:classappend="${activeTab == 'Home' ? 'active' : ''}"
-                           th:href="@{/demo}">Home</a>
+                           th:href="@{/copro}">Home</a>
                     </li>
                     <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                         <a class="nav-link dropdown-toggle" th:classappend="${activeTab == 'CoPro' ? 'active' : ''}"
                            data-toggle="dropdown" href="#" role="button"
                            aria-haspopup="true" aria-expanded="false">CoPro</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" th:href="@{/demo/alltoview}">All CoPros</a>
-                            <a class="dropdown-item" th:href="@{/demo/add-through-view}">Add CoPro</a>
-                            <a class="dropdown-item" th:href="@{/demo/delete-through-view}">Delete CoPro</a>
-                            <a class="dropdown-item" th:href="@{/demo/find-copro-by-coproid-view}">Find CoPro by
+                            <a class="dropdown-item" th:href="@{/copro/listdata}">All CoPros</a>
+                            <a class="dropdown-item" th:href="@{/copro/create}">Add CoPro</a>
+                            <a class="dropdown-item" th:href="@{/copro/delete-through-view}">Delete CoPro</a>
+                            <a class="dropdown-item" th:href="@{/copro/find-copro-by-coproid-view}">Find CoPro by
                                 CoProId</a>
-                            <a class="dropdown-item" th:href="@{/demo/find-copro-by-co-or-pro-etc-view}">Find CoPro by
+                            <a class="dropdown-item" th:href="@{/copro/find-copro-by-co-or-pro-etc-view}">Find CoPro by
                                 Co/Pro/CoOrPro/CoAndPro</a>
                         </div>
                     </li>
@@ -94,19 +94,19 @@
             <ul class="nav nav-pills">
                 <li class="nav-item">
                     <a class="nav-link" th:classappend="${activeTab == 'Home' ? 'active' : ''}"
-                       th:href="@{/demo}">Home</a>
+                       th:href="@{/copro}">Home</a>
                 </li>
                 <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                     <a class="nav-link dropdown-toggle" th:classappend="${activeTab == 'CoPro' ? 'active' : ''}"
                        data-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">CoPro</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" th:href="@{/demo/alltoview}">All CoPros</a>
-                        <a class="dropdown-item" th:href="@{/demo/add-through-view}">Add CoPro</a>
-                        <a class="dropdown-item" th:href="@{/demo/delete-through-view}">Delete CoPro</a>
-                        <a class="dropdown-item" th:href="@{/demo/find-copro-by-coproid-view}">Find CoPro by
+                        <a class="dropdown-item" th:href="@{/copro/listdata}">All CoPros</a>
+                        <a class="dropdown-item" th:href="@{/copro/create}">Add CoPro</a>
+                        <a class="dropdown-item" th:href="@{/copro/delete-through-view}">Delete CoPro</a>
+                        <a class="dropdown-item" th:href="@{/copro/find-copro-by-coproid-view}">Find CoPro by
                             CoProId</a>
-                        <a class="dropdown-item" th:href="@{/demo/find-copro-by-co-or-pro-etc-view}">Find CoPro by
+                        <a class="dropdown-item" th:href="@{/copro/find-copro-by-co-or-pro-etc-view}">Find CoPro by
                             Co/Pro/CoOrPro/CoAndPro</a>
                     </div>
                 </li>
