@@ -7,7 +7,7 @@
 <body>
 <h1 th:text="${headerCpId}">!!!</h1>
 <!--<form action="#" th:action="@{/demo/${}show-deleted-through-view}" th:object="${coproId}" method="post">-->
-<form th:object="${coproId}" th:action="@{/co/delete-through-view}" method="post">
+<form th:object="${coproId}" th:action="@{/copro/delete-through-view}" method="post">
     <table>
         <tr>
             <td>Counterparty short name:</td><td><input type="text" th:field="*{counterpartyShortName}"/></td>
