@@ -1,5 +1,8 @@
-package com.example.webclientmysql;
+package com.example.webclientmysql.controllers;
 
+import com.example.webclientmysql.entities.CounterpartyProduct;
+import com.example.webclientmysql.entities.CounterpartyProductId;
+import com.example.webclientmysql.repositories.CounterpartyProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,12 +65,14 @@ public class CoProController {
     @PostMapping(value = "/show-through-view")
     public String submitCounterpartyProduct(@ModelAttribute CounterpartyProduct counterpartyProduct) {
         counterpartyProduct = counterpartyProductRepository.save(counterpartyProduct);
-        return "redirect:/demo/submitted/" + counterpartyProduct.getCounterpartyShortName() + "/" + counterpartyProduct.getProductShortName();
+        return "redirect:/copro/submitted/" + counterpartyProduct.getCounterpartyShortName() + "/" + counterpartyProduct.getCountryCode() + "/" +
+                counterpartyProduct.getPlace() + "/" + counterpartyProduct.getProductShortName();
     }
 
-    @GetMapping(value = "/submitted/{co}/{pro}")
-    public String showSubmittedCounterpartyProduct(ModelMap model, @PathVariable("co") String counterpartyShortName, @PathVariable("pro") String productShortName) {
-        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(new CounterpartyProductId(counterpartyShortName, productShortName)).orElse(new CounterpartyProduct());
+    @GetMapping(value = "/submitted/{co}/{ccode}/{place}/{pro}")
+    public String showSubmittedCounterpartyProduct(ModelMap model, @PathVariable("co") String counterpartyShortName, @PathVariable("ccode") String countryCode,
+                                                   @PathVariable("place") String place, @PathVariable("pro") String productShortName) {
+        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(new CounterpartyProductId(counterpartyShortName, countryCode, place, productShortName)).orElse(new CounterpartyProduct());
         model.addAttribute("counterpartyProduct", counterpartyProduct);
         model.addAttribute("headerCp", "The following entry has been successfully added to the database:");
         return "cp-processed-view";
@@ -122,8 +127,8 @@ public class CoProController {
     public String displayFoundByCoEtc(Model model, @ModelAttribute("coproId") CounterpartyProductId counterpartyProductId, @RequestParam("searchOption") String searchOption) {
         String counterpartyShortName = counterpartyProductId.getCounterpartyShortName();
         String productShortName = counterpartyProductId.getProductShortName();
-        System.out.println(counterpartyShortName+"  "+productShortName);
-        List<CounterpartyProduct> counterpartyProducts=new ArrayList<>();
+        System.out.println(counterpartyShortName + "  " + productShortName);
+        List<CounterpartyProduct> counterpartyProducts = new ArrayList<>();
         switch (searchOption) {
             case "ByCounterparty":
                 counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortName(counterpartyShortName);
@@ -132,10 +137,10 @@ public class CoProController {
                 counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByProductShortName(productShortName);
                 break;
             case "ByCounterpartyOrProduct":
-                counterpartyProducts=counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortNameOrProductShortName(counterpartyShortName, productShortName);
+                counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortNameOrProductShortName(counterpartyShortName, productShortName);
                 break;
             case "ByCounterpartyAndProduct":
-                counterpartyProducts=counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortNameAndProductShortName(counterpartyShortName, productShortName);
+                counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortNameAndProductShortName(counterpartyShortName, productShortName);
                 break;
             default:
                 System.out.println("Default option in switch");
@@ -154,7 +159,7 @@ public class CoProController {
     }
 
     @GetMapping(path = "/copro")
-    public String goToCoPro(){
+    public String goToCoPro() {
         return "co-pro";
     }
 }

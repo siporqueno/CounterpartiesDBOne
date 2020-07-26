@@ -1,4 +1,4 @@
-package com.example.webclientmysql;
+package com.example.webclientmysql.entities;
 
 import javax.persistence.*;
 
@@ -9,6 +9,12 @@ public class CounterpartyProduct {
     @Id
     @Column(name = "counterparty_short_name")
     private String counterpartyShortName;
+    @Id
+    @Column(name="country_code")
+    private String countryCode;
+    @Id
+    @Column(name="place")
+    private String place;
     @Id
     @Column(name = "product_short_name")
     private String productShortName;
@@ -29,6 +35,22 @@ public class CounterpartyProduct {
 
     public void setCounterpartyShortName(String counterpartyShortName) {
         this.counterpartyShortName = counterpartyShortName;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     public String getProductShortName() {

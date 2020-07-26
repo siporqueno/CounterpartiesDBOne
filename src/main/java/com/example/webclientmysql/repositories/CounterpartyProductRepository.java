@@ -1,5 +1,7 @@
-package com.example.webclientmysql;
+package com.example.webclientmysql.repositories;
 
+import com.example.webclientmysql.entities.CounterpartyProduct;
+import com.example.webclientmysql.entities.CounterpartyProductId;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

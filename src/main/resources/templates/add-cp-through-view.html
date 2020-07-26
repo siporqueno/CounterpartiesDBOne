@@ -14,8 +14,10 @@
     <div th:replace="~{navigation :: navigationThree(CoPro)}"/>
 
     <h1 th:text="${headerCp}">!!!</h1>
-    <form action="#" th:action="@{/demo/show-through-view}" th:object="${copro}" method="post">
+    <form action="#" th:action="@{/copro/show-through-view}" th:object="${copro}" method="post">
         <p>Counterparty short name: <input type="text" th:field="*{counterpartyShortName}"/></p>
+        <p>Country code: <input type="text" th:field="*{countryCode}"/></p>
+        <p>Place: <input type="text" th:field="*{place}"/></p>
         <p>Product short name: <input type="text" th:field="*{productShortName}"/></p>
         <!--    <p>Is Buyer?: <input type="text" th:field="*{isBuyer}"/></p>-->
         <p>Is Buyer?: <input type="checkbox" th:field="*{isBuyer}"/></p>

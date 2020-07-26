@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Co added to the database</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1 th:text="${headerCo}">!!!</h1>
+<table border="1">
+    <tr>
+        <td>Counterparty short name:</td><td th:text="${counterparty.counterpartyShortName}">Name</td>
+    </tr>
+    <tr>
+        <td>Country code:</td><td th:text="${counterparty.countryCode}">Country code</td>
+    </tr>
+    <tr>
+        <td>Region:</td><td th:text="${counterparty.region}">Region</td>
+    </tr>
+    <tr>
+        <td>Place:</td><td th:text="${counterparty.place}">Place</td>
+    </tr>
+</table>
+
+<p><a href="/co/create">Submit another Counterparty</a></p>
+<p><a href="/co/delete-through-view">Delete another Counterparty</a></p>
+<!--The following link needs to be edited-->
+<p><a href="/co/find-copro-by-coproid-view">Find another Counterparty</a></p>
+<p><a href="/copro">Home</a></p>
+
+</body>
+</html>
