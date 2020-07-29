@@ -1,32 +1,27 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
+    <title>Do sth with Co by CoId</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1 th:text="${headerCpId}">!!!</h1>
+<h1 th:text="${headerCoId}">!!!</h1>
 <!--<form action="#" th:action="@{/demo/${}show-deleted-through-view}" th:object="${coproId}" method="post">-->
-<!--<form th:object="${coproId}" th:action="@{/copro/delete-through-view}" method="post">-->
-<form th:object="${coproId}" method="post">
+<form th:object="${coId}" method="post">
     <table>
         <tr>
             <td>Counterparty short name:</td><td><input type="text" th:field="*{counterpartyShortName}"/></td>
         </tr>
         <tr>
-            <td>Country code:</td><td><input type="text" th:field="*{countryCode}"/></td>
+            <td>Country code:</td><td><input type="text" th:field="*{countryCode}" /></td>
         </tr>
         <tr>
-            <td>Place:</td><td><input type="text" th:field="*{place}"/></td>
-        </tr>
-        <tr>
-            <td>Product short name:</td><td><input type="text" th:field="*{productShortName}" /></td>
+            <td>Place:</td><td><input type="text" th:field="*{place}" /></td>
         </tr>
     </table>
     <!--<p>Counterparty short name: <input type="text" th:field="*{counterpartyShortName}" /></p>
     <p>Product short name: <input type="text" th:field="*{productShortName}" /></p>-->
     <p><input type="submit" th:value="${btn}" /> <input type="reset" value="Reset" /></p>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 <a href="/copro">Home</a>
 </body>

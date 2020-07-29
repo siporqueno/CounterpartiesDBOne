@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CoPro list</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="~{navigation :: navigationOne(Co)}"/>
+    <div th:replace="~{navigation :: navigationThree(Co)}"/>
+
+    <div class="row">
+        <div class="col">
+            <!--    <table border="1">-->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Counterparty</th>
+                    <th scope="col">Country Code</th>
+                    <th scope="col">Region</th>
+                    <th scope="col">Place</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="counterparty : ${counterparties}">
+                    <td th:text="${counterparty.counterpartyShortName}">1</td>
+                    <td th:text="${counterparty.countryCode}">1</td>
+                    <td th:text="${counterparty.region}">1</td>
+                    <td th:text="${counterparty.place}">1</td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="/copro">Home</a>
+        </div>
+    </div>
+
+</div>
+
+<script src="/js/popper.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
