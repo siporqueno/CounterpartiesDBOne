@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Let's find Pro by Short/Full Name</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{navigation :: navigationOne(Pro)}"/>
+    <div th:replace="~{navigation :: navigationThree(Pro)}"/>
+
+    <h1 th:text="${headerPro}">!!!</h1>
+    <form th:object="${pro}" th:action=@{/pro/find-pro-by-short-or-full-name-view} method="post">
+        <table>
+            <tr>
+                <td>Product Short Name:</td>
+                <td><input type="text" th:field="*{productShortName}"/></td>
+            </tr>
+            <tr>
+                <td>Product Full Name:</td>
+                <td><input type="text" th:field="*{productFullName}"/></td>
+            </tr>
+        </table>
+        <ul>
+            <li><input type="radio" name="searchOption" value="ByShortName">
+                <label>By Product Short Name</label></li>
+            <li><input type="radio" name="searchOption" value="ByFullName">
+                <label>By Product Full Name</label></li>
+            <li><input type="radio" name="searchOption" value="ByShortOrFullName" checked>
+                <label>By Product Short Or Full Name</label></li>
+            <li><input type="radio" name="searchOption" value="ByShortAndFullName" checked>
+                <label>By Product Short And Full Name</label></li>
+        </ul>
+        <p><input type="submit" th:value="${btn}"/> <input type="reset" value="Reset"/></p>
+    </form>
+    <a href="/copro">Home</a>
+</div>
+
+<script src="/js/jquery.js"></script>
+<script src="/js/popper.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -3,15 +3,11 @@ package com.example.webclientmysql.entities;
 import java.io.Serializable;
 
 public class CounterpartyProductId implements Serializable {
-    private String counterpartyShortName;
-    private String countryCode;
-    private String place;
+    private Integer counterpartyId;
     private String productShortName;
 
-    public CounterpartyProductId(String counterpartyShortName, String countryCode, String place, String productShortName) {
-        this.counterpartyShortName = counterpartyShortName;
-        this.countryCode = countryCode;
-        this.place = place;
+    public CounterpartyProductId(Integer counterpartyId, String productShortName) {
+        this.counterpartyId = counterpartyId;
         this.productShortName = productShortName;
     }
 
@@ -25,38 +21,21 @@ public class CounterpartyProductId implements Serializable {
         if (obj == null || getClass() != obj.getClass()) return false;
 
         CounterpartyProductId another = (CounterpartyProductId) obj;
-        return this.counterpartyShortName.equals(another.counterpartyShortName) && this.countryCode.equals(another.countryCode) &&
-                this.place.equals(another.place) && this.productShortName.equals(another.productShortName);
+
+        return this.counterpartyId == another.counterpartyId && this.productShortName.equals(another.productShortName);
     }
 
     @Override
     public int hashCode() {
-        return counterpartyShortName.hashCode() + countryCode.hashCode() +
-                place.hashCode() + productShortName.hashCode();
+        return counterpartyId.hashCode() + productShortName.hashCode();
     }
 
-    public String getCounterpartyShortName() {
-        return counterpartyShortName;
+    public int getCounterpartyId() {
+        return counterpartyId;
     }
 
-    public void setCounterpartyShortName(String counterpartyShortName) {
-        this.counterpartyShortName = counterpartyShortName;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
+    public void setCounterpartyId(int counterpartyId) {
+        this.counterpartyId = counterpartyId;
     }
 
     public String getProductShortName() {

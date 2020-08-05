@@ -7,14 +7,8 @@ import javax.persistence.*;
 @Table(name = "counterparties_products")
 public class CounterpartyProduct {
     @Id
-    @Column(name = "counterparty_short_name")
-    private String counterpartyShortName;
-    @Id
-    @Column(name="country_code")
-    private String countryCode;
-    @Id
-    @Column(name="place")
-    private String place;
+    @Column(name = "counterparty_id")
+    private Integer counterpartyId;
     @Id
     @Column(name = "product_short_name")
     private String productShortName;
@@ -28,29 +22,16 @@ public class CounterpartyProduct {
     private boolean isProducer;
     @Column(name = "quantity")
     private String quantity;
+    @ManyToOne
+    @JoinColumn(name="counterparty_id", insertable = false, updatable = false)
+    private Counterparty co;
 
-    public String getCounterpartyShortName() {
-        return counterpartyShortName;
+    public Integer getCounterpartyId() {
+        return counterpartyId;
     }
 
-    public void setCounterpartyShortName(String counterpartyShortName) {
-        this.counterpartyShortName = counterpartyShortName;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
+    public void setCounterpartyId(Integer counterpartyId) {
+        this.counterpartyId = counterpartyId;
     }
 
     public String getProductShortName() {
@@ -101,4 +82,11 @@ public class CounterpartyProduct {
         this.quantity = quantity;
     }
 
+    public Counterparty getCo() {
+        return co;
+    }
+
+    public void setCo(Counterparty co) {
+        this.co = co;
+    }
 }

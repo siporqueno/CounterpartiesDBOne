@@ -2,12 +2,18 @@ package com.example.webclientmysql.controllers;
 
 import com.example.webclientmysql.entities.Counterparty;
 import com.example.webclientmysql.entities.CounterpartyId;
+import com.example.webclientmysql.entities.CounterpartyProduct;
+import com.example.webclientmysql.entities.CounterpartyProductId;
 import com.example.webclientmysql.repositories.CounterpartyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path = "/co")
@@ -33,12 +39,12 @@ public class CoController {
     @PostMapping(value = "/show-through-view")
     public String submitCounterparty(@ModelAttribute Counterparty counterparty) {
         counterparty = counterpartyRepository.save(counterparty);
-        return "redirect:/co/submitted/" + counterparty.getCounterpartyShortName() + "/" + counterparty.getCountryCode()+"/"+counterparty.getPlace();
+        return "redirect:/co/submitted/" + counterparty.getId();
     }
 
-    @GetMapping(value = "/submitted/{co}/{ccode}/{place}")
-    public String showSubmittedCounterparty(ModelMap model, @PathVariable("co") String counterpartyShortName, @PathVariable("ccode") String countryCode, @PathVariable("place") String place) {
-        Counterparty counterparty = counterpartyRepository.findById(new CounterpartyId(counterpartyShortName, countryCode, place)).orElse(new Counterparty());
+    @GetMapping(value = "/submitted/{coid}")
+    public String showSubmittedCounterparty(ModelMap model, @PathVariable("coid") Integer counterpartyId) {
+        Counterparty counterparty = counterpartyRepository.findById(counterpartyId).orElse(new Counterparty());
         model.addAttribute("counterparty", counterparty);
         model.addAttribute("headerCo", "The following entry has been successfully added to the database:");
         return "co/co-processed-view";
@@ -54,12 +60,55 @@ public class CoController {
 
     @PostMapping(path = "/delete-through-view")
     public String displayDeletedCoById(Model model, @ModelAttribute("coId") CounterpartyId counterpartyId) {
-        Counterparty counterparty = counterpartyRepository.findById(counterpartyId).orElse(new Counterparty());
-        counterpartyRepository.deleteById(counterpartyId);
+        Counterparty counterparty = counterpartyRepository
+                .findByCounterpartyShortNameAndCountryCodeAndPlace(counterpartyId.getCounterpartyShortName(),
+                        counterpartyId.getCountryCode(), counterpartyId.getPlace()).orElse(new Counterparty(-1, counterpartyId));
+        System.out.println(counterparty.getCounterpartyShortName());
+        System.out.println(counterparty.getCountryCode());
+        System.out.println(counterparty.getRegion());
+        System.out.println(counterparty.getPlace());
+        if (counterparty.getId() != -1) counterpartyRepository.deleteById(counterparty.getId());
         model.addAttribute("counterparty", counterparty);
-        model.addAttribute("headerCo", "The following entry has been successfully deleted from the database:");
-//        return "deleted-through-view";
+        model.addAttribute("headerCo", (counterparty.getId() != -1) ? "The following entry has been successfully deleted from the database:" : "The following entry was not present in the database hence could not be deleted");
         return "co/co-processed-view";
 
+    }
+
+    @GetMapping(path = "/find-co-by-name-or-country-etc-view")
+    public String formFindCoByNameOrCountryEtc(Model model) {
+        model.addAttribute("headerCo", "Form to search Counterparty by Name or Country or Region or Place");
+        model.addAttribute("co", new Counterparty());
+        model.addAttribute("btn", "Search");
+        return "co/form-to-find-co-by-name-or-country-etc";
+    }
+
+    @PostMapping(path = "/find-co-by-name-or-country-etc-view")
+    public String displayCosFoundByNameOrCountryEtc(Model model, @ModelAttribute("co") Counterparty counterparty, @RequestParam("searchOption") String searchOption) {
+        List<Counterparty> counterparties = new ArrayList<>();
+        switch (searchOption) {
+            case "ById":
+                counterparties = counterpartyRepository.findById(counterparty.getId()).stream().collect(Collectors.toList());
+                break;
+            case "ByName":
+                counterparties = counterpartyRepository.findByCounterpartyShortName(counterparty.getCounterpartyShortName());
+                break;
+            case "ByCountry":
+                counterparties = counterpartyRepository.findByCountryCode(counterparty.getCountryCode());
+                break;
+            case "ByRegion":
+                counterparties = counterpartyRepository.findByRegion(counterparty.getRegion());
+                break;
+            case "ByPlace":
+                counterparties = counterpartyRepository.findByPlace(counterparty.getPlace());
+                break;
+            default:
+                System.out.println("Default option in switch");
+        }
+//        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
+//        model.addAttribute("counterpartyProduct", counterpartyProduct);
+        model.addAttribute("counterparties", counterparties);
+        model.addAttribute("headerCp", "Entry(ies) found in the database:");
+//        System.out.println(searchOption);
+        return "co/allcounterparties";
     }
 }

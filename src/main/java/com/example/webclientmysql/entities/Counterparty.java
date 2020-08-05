@@ -1,22 +1,44 @@
 package com.example.webclientmysql.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@IdClass(CounterpartyId.class)
 @Table(name = "counterparties")
 public class Counterparty {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
     @Column(name = "counterparty_short_name")
     private String counterpartyShortName;
-    @Id
     @Column(name = "country_code")
     private String countryCode;
     @Column(name = "region")
     private String region;
-    @Id
-    @Column(name="place")
+    @Column(name = "place")
     private String place;
+    @OneToMany(mappedBy = "counterpartyId")
+    private Set<CounterpartyProduct> copros = new HashSet<>();
+
+    public Counterparty() {
+    }
+
+    public Counterparty(Integer id, CounterpartyId coId) {
+        this.id = id;
+        this.counterpartyShortName = coId.getCounterpartyShortName();
+        this.countryCode = coId.getCountryCode();
+        this.place = coId.getPlace();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getCounterpartyShortName() {
         return counterpartyShortName;
@@ -48,5 +70,13 @@ public class Counterparty {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public Set<CounterpartyProduct> getCopros() {
+        return copros;
+    }
+
+    public void setCopros(Set<CounterpartyProduct> copros) {
+        this.copros = copros;
     }
 }
