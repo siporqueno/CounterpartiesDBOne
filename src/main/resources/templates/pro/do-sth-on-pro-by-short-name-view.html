@@ -10,10 +10,12 @@
 <body>
 <div class="container">
     <div th:replace="~{navigation :: navigationOne(Co)}"/>
-    <div th:replace="~{navigation :: navigationThree(Co)}"/>
-
-
-    <h1 th:text="${headerPro}">!!!</h1>
+    <!--    <div th:replace="~{navigation :: navigationThree(Co)}"/>-->
+    <div class="row" style="height: 150px">
+        <div class="col align-self-end">
+            <h1 th:text="${headerPro}">!!!</h1>
+        </div>
+    </div>
 
     <form th:object=${pro} th:action="@{/pro/delete-through-view}" method="post">
         <table class="table">

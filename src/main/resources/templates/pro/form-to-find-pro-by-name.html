@@ -10,9 +10,13 @@
 <body>
 <div class="container">
     <div th:replace="~{navigation :: navigationOne(Pro)}"/>
-    <div th:replace="~{navigation :: navigationThree(Pro)}"/>
+    <!--    <div th:replace="~{navigation :: navigationThree(Pro)}"/>-->
+    <div class="row" style="height: 150px">
+        <div class="col align-self-end">
+            <h1 th:text="${headerPro}">!!!</h1>
+        </div>
+    </div>
 
-    <h1 th:text="${headerPro}">!!!</h1>
     <form th:object="${pro}" th:action=@{/pro/find-pro-by-short-or-full-name-view} method="post">
         <table>
             <tr>
