@@ -6,14 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-<!--    <link rel="stylesheet" href="/style.css">-->
+    <!--    <link rel="stylesheet" href="/style.css">-->
 </head>
 <body>
 
 <div class="container">
     <div th:replace="~{navigation :: navigationThree(CoPro)}"/>
 
-    <h1 th:text="${headerCp}">!!!</h1>
+    <div class="row" style="height: 150px">
+        <div class="col align-self-end">
+            <h1 th:text="${headerCp}">!!!</h1>
+        </div>
+    </div>
+
     <form action="#" th:action="@{/copro/show-through-view}" th:object="${copro}" method="post">
         <p>Counterparty short name: <input type="text" th:field="*{counterpartyShortName}"/></p>
         <p>Country code: <input type="text" th:field="*{countryCode}"/></p>

@@ -10,21 +10,28 @@
 <body>
 <div class="container">
     <div th:replace="~{navigation :: navigationOne(Co)}"/>
-    <div th:replace="~{navigation :: navigationThree(Co)}"/>
-
-    <h1 th:text="${headerCo}">!!!</h1>
+    <!--    <div th:replace="~{navigation :: navigationThree(Co)}"/>-->
+    <div class="row" style="height: 150px">
+        <div class="col align-self-end">
+            <h1 th:text="${headerCo}">!!!</h1>
+        </div>
+    </div>
     <table border="1">
         <tr>
-            <td>Counterparty short name:</td><td th:text="${counterparty.counterpartyShortName}">Name</td>
+            <td>Counterparty short name:</td>
+            <td th:text="${counterparty.counterpartyShortName}">Name</td>
         </tr>
         <tr>
-            <td>Country code:</td><td th:text="${counterparty.countryCode}">Country code</td>
+            <td>Country code:</td>
+            <td th:text="${counterparty.countryCode}">Country code</td>
         </tr>
         <tr>
-            <td>Region:</td><td th:text="${counterparty.region}">Region</td>
+            <td>Region:</td>
+            <td th:text="${counterparty.region}">Region</td>
         </tr>
         <tr>
-            <td>Place:</td><td th:text="${counterparty.place}">Place</td>
+            <td>Place:</td>
+            <td th:text="${counterparty.place}">Place</td>
         </tr>
     </table>
 

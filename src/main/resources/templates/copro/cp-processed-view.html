@@ -1,46 +1,61 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Processed CoPros</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 </head>
 <body>
-<h1 th:text="${headerCp}">!!!</h1>
-<table border="1">
-    <tr>
-        <td>Counterparty short name:</td><td th:text="${counterpartyProduct.counterpartyShortName}">Name</td>
-    </tr>
-    <tr>
-        <td>Product short name:</td><td th:text="${counterpartyProduct.productShortName}">Product</td>
-    </tr>
-    <tr>
-        <td>Is Buyer?:</td><td th:text="${counterpartyProduct.isBuyer}">Buyer?</td>
-    </tr>
-    <tr>
-        <td>Is Seller?:</td><td th:text="${counterpartyProduct.isSeller}">Seller?</td>
-    </tr>
-    <tr>
-        <td>Is Consumer?:</td><td th:text="${counterpartyProduct.isConsumer}">Consumer?</td>
-    </tr>
-    <tr>
-        <td>Is Producer?:</td><td th:text="${counterpartyProduct.isProducer}">Producer?</td>
-    </tr>
-    <tr>
-        <td>Quantity:</td><td th:text="${counterpartyProduct.quantity}">Quantity</td>
-    </tr>
-</table>
-<!--<p th:text="'Counterparty short name: ' + ${counterpartyProduct.counterpartyShortName}" />-->
-<!--<p th:text="'Product short name: ' + ${counterpartyProduct.productShortName}" />-->
-<!--<p th:text="'Is Buyer?: ' + ${counterpartyProduct.isBuyer}" />-->
-<!--<p th:text="'Is Seller?: ' + ${counterpartyProduct.isSeller}" />-->
-<!--<p th:text="'Is Consumer?: ' + ${counterpartyProduct.isConsumer}" />-->
-<!--<p th:text="'Is Producer?: ' + ${counterpartyProduct.isProducer}" />-->
-<!--<p th:text="'Quantity: ' + ${counterpartyProduct.quantity}" />-->
+<div class="container">
+    <div th:replace="~{navigation :: navigationOne(CoPro)}"/>
 
-<p><a href="/copro/add-through-view">Submit another CounterpartyProduct</a></p>
-<p><a href="/copro/delete-through-view">Delete another CounterpartyProduct</a></p>
-<p><a href="/copro/find-copro-by-coproid-view">Find another CounterpartyProduct</a></p>
-<p><a href="/copro">Home</a></p>
+    <div class="row" style="height: 150px">
+        <div class="col align-self-end">
+            <h1 th:text="${headerCp}">!!!</h1>
+        </div>
+    </div>
 
+    <table border="1">
+        <tr>
+            <td>Counterparty short name:</td><td th:text="${counterpartyProduct.counterpartyShortName}">Name</td>
+        </tr>
+        <tr>
+            <td>Product short name:</td><td th:text="${counterpartyProduct.productShortName}">Product</td>
+        </tr>
+        <tr>
+            <td>Is Buyer?:</td><td th:text="${counterpartyProduct.isBuyer}">Buyer?</td>
+        </tr>
+        <tr>
+            <td>Is Seller?:</td><td th:text="${counterpartyProduct.isSeller}">Seller?</td>
+        </tr>
+        <tr>
+            <td>Is Consumer?:</td><td th:text="${counterpartyProduct.isConsumer}">Consumer?</td>
+        </tr>
+        <tr>
+            <td>Is Producer?:</td><td th:text="${counterpartyProduct.isProducer}">Producer?</td>
+        </tr>
+        <tr>
+            <td>Quantity:</td><td th:text="${counterpartyProduct.quantity}">Quantity</td>
+        </tr>
+    </table>
+    <!--<p th:text="'Counterparty short name: ' + ${counterpartyProduct.counterpartyShortName}" />-->
+    <!--<p th:text="'Product short name: ' + ${counterpartyProduct.productShortName}" />-->
+    <!--<p th:text="'Is Buyer?: ' + ${counterpartyProduct.isBuyer}" />-->
+    <!--<p th:text="'Is Seller?: ' + ${counterpartyProduct.isSeller}" />-->
+    <!--<p th:text="'Is Consumer?: ' + ${counterpartyProduct.isConsumer}" />-->
+    <!--<p th:text="'Is Producer?: ' + ${counterpartyProduct.isProducer}" />-->
+    <!--<p th:text="'Quantity: ' + ${counterpartyProduct.quantity}" />-->
+
+    <p><a href="/copro/add-through-view">Submit another CounterpartyProduct</a></p>
+    <p><a href="/copro/delete-through-view">Delete another CounterpartyProduct</a></p>
+    <p><a href="/copro/find-copro-by-coproid-view">Find another CounterpartyProduct</a></p>
+    <p><a href="/copro">Home</a></p>
+</div>
+
+<script src="/js/jquery.js"></script>
+<script src="/js/popper.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
