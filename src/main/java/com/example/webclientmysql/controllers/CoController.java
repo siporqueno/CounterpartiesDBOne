@@ -25,7 +25,7 @@ public class CoController {
     public String listCo(Model model) {
         model.addAttribute("name", "Kanechno Vasya");
         model.addAttribute("counterparties", counterpartyRepository.findAll());
-        model.addAttribute("headerCo", "Here are all the entries in the database:");
+        model.addAttribute("headerCos", "Here are all the entries in the database:");
         return "co/allcounterparties";
     }
 
@@ -87,7 +87,8 @@ public class CoController {
         List<Counterparty> counterparties = new ArrayList<>();
         switch (searchOption) {
             case "ById":
-                counterparties = counterpartyRepository.findById(counterparty.getId()).stream().collect(Collectors.toList());
+                counterparties.add(counterpartyRepository.findById(counterparty.getId()).orElse(new Counterparty()));
+//                counterparties = counterpartyRepository.findById(counterparty.getId()).stream().collect(Collectors.toList());
                 break;
             case "ByName":
                 counterparties = counterpartyRepository.findByCounterpartyShortName(counterparty.getCounterpartyShortName());
@@ -107,7 +108,7 @@ public class CoController {
 //        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
 //        model.addAttribute("counterpartyProduct", counterpartyProduct);
         model.addAttribute("counterparties", counterparties);
-        model.addAttribute("headerCp", "Entry(ies) found in the database:");
+        model.addAttribute("headerCos", "Entry(ies) found in the database:");
 //        System.out.println(searchOption);
         return "co/allcounterparties";
     }

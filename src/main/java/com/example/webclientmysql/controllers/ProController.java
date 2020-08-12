@@ -23,7 +23,7 @@ public class ProController {
     @GetMapping(path = "/listdata")
     public String listCo(Model model) {
         model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("headerCo", "Here are all the entries in the database:");
+        model.addAttribute("headerPros", "Here are all the entries in the database:");
         return "pro/allproducts";
     }
 
@@ -80,7 +80,8 @@ public class ProController {
         switch (searchOption) {
             // Short Name is Id in Product
             case "ByShortName":
-                products = productRepository.findById(product.getProductShortName()).stream().collect(Collectors.toList());
+                products.add(productRepository.findById(product.getProductShortName()).orElse(new Product()));
+//                products = productRepository.findById(product.getProductShortName()).stream().collect(Collectors.toList());
                 break;
             case "ByFullName":
                 products = productRepository.findByProductFullName(product.getProductFullName());
