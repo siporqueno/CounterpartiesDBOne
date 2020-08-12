@@ -30,11 +30,11 @@ public class CounterpartyProductId implements Serializable {
         return counterpartyId.hashCode() + productShortName.hashCode();
     }
 
-    public int getCounterpartyId() {
+    public Integer getCounterpartyId() {
         return counterpartyId;
     }
 
-    public void setCounterpartyId(int counterpartyId) {
+    public void setCounterpartyId(Integer counterpartyId) {
         this.counterpartyId = counterpartyId;
     }
 

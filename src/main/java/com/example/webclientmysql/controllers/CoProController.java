@@ -100,7 +100,7 @@ public class CoProController {
         model.addAttribute("headerCpId", "Form to search Counterparty Product by Counterparty and Product");
         model.addAttribute("coproId", new CounterpartyProductId());
         model.addAttribute("btn", "Search");
-        return "copro/do-sth-on-cp-by-cpid-view";
+        return "copro/find-cp-by-cpid-view";
     }
 
     @PostMapping(path = "/find-copro-by-coproid-view")
@@ -123,12 +123,12 @@ public class CoProController {
 
     @PostMapping(path = "/find-copro-by-co-or-pro-etc-view")
     public String displayFoundByCoEtc(Model model, @ModelAttribute("coproId") CounterpartyProductId counterpartyProductId, @RequestParam("searchOption") String searchOption) {
-        int counterpartyId = counterpartyProductId.getCounterpartyId();
+        Integer counterpartyId = counterpartyProductId.getCounterpartyId();
         String productShortName = counterpartyProductId.getProductShortName();
         System.out.println(counterpartyId + "  " + productShortName);
         List<CounterpartyProduct> counterpartyProducts = new ArrayList<>();
         switch (searchOption) {
-            case "ByCounterparty":
+            case "ByCounterpartyId":
                 counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyId(counterpartyId);
                 break;
             case "ByProduct":

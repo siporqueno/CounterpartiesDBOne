@@ -19,7 +19,7 @@
 
     <table border="1">
         <tr>
-            <td>Counterparty short name:</td><td th:text="${counterpartyProduct.counterpartyShortName}">Name</td>
+            <td>Counterparty id:</td><td th:text="${counterpartyProduct.counterpartyId}">Name</td>
         </tr>
         <tr>
             <td>Product short name:</td><td th:text="${counterpartyProduct.productShortName}">Product</td>
@@ -48,7 +48,7 @@
     <!--<p th:text="'Is Producer?: ' + ${counterpartyProduct.isProducer}" />-->
     <!--<p th:text="'Quantity: ' + ${counterpartyProduct.quantity}" />-->
 
-    <p><a href="/copro/add-through-view">Submit another CounterpartyProduct</a></p>
+    <p><a href="/copro/create">Submit another CounterpartyProduct</a></p>
     <p><a href="/copro/delete-through-view">Delete another CounterpartyProduct</a></p>
     <p><a href="/copro/find-copro-by-coproid-view">Find another CounterpartyProduct</a></p>
     <p><a href="/copro">Home</a></p>
