@@ -10,33 +10,29 @@
 <body>
 
 <div class="container">
-    <div th:replace="~{navigation :: navigationOne(Co)}"/>
-    <!--    <div th:replace="~{navigation :: navigationThree(Co)}"/>-->
+    <div th:replace="~{navigation :: navigationOne(Pro)}"/>
+    <!--    <div th:replace="~{navigation :: navigationThree(Pro)}"/>-->
+
     <div class="row" style="height: 100px">
         <div class="col align-self-end">
-            <h1 th:text="${headerCos}">!!!</h1>
+            <h1 th:text="${headerPros}">!!!</h1>
         </div>
     </div>
+
     <div class="row">
         <div class="col">
             <!--    <table border="1">-->
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Counterparty</th>
-                    <th scope="col">Country Code</th>
-                    <th scope="col">Region</th>
-                    <th scope="col">Place</th>
+                    <th scope="col">Product Short Name</th>
+                    <th scope="col">Product Full Name</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="counterparty : ${counterparties}">
-                    <td th:text="${counterparty.id}">1</td>
-                    <td th:text="${counterparty.counterpartyShortName}">1</td>
-                    <td th:text="${counterparty.countryCode}">1</td>
-                    <td th:text="${counterparty.region}">1</td>
-                    <td th:text="${counterparty.place}">1</td>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.productShortName}">Product Short Name</td>
+                    <td th:text="${product.productFullName}">Product Full Name</td>
                 </tr>
                 </tbody>
             </table>

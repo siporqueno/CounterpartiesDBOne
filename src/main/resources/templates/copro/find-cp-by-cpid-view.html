@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Do sth with Co by CoId</title>
+    <title>Do sth with CoPro</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -9,39 +9,44 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{navigation :: navigationOne(Co)}"/>
-    <!--    <div th:replace="~{navigation :: navigationThree(Co)}"/>-->
+    <div th:replace="~{navigation :: navigationOne(CoPro)}"/>
 
     <div class="row" style="height: 150px">
         <div class="col align-self-end">
-            <h1 th:text="${headerCoId}">!!!</h1>
+            <h1 th:text="${headerCpId}">!!!</h1>
         </div>
     </div>
 
-    <form th:object="${coId}" th:action="@{/co/delete-through-view}" method="post">
+    <!--<form action="#" th:action="@{/demo/${}show-deleted-through-view}" th:object="${coproId}" method="post">-->
+    <form th:object="${coproId}" th:action="@{/copro/find-copro-by-coproid-view}" method="post">
         <table>
             <tr>
-                <td>Counterparty short name:</td>
-                <td><input type="text" th:field="*{counterpartyShortName}"/></td>
+                <td>Counterparty id:</td>
+                <td><input type="text" th:field="*{counterpartyId}"/></td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td>Country code:</td>
                 <td><input type="text" th:field="*{countryCode}"/></td>
-            </tr>
-            <tr>
+            </tr>-->
+            <!--<tr>
                 <td>Place:</td>
                 <td><input type="text" th:field="*{place}"/></td>
+            </tr>
+            <tr>-->
+                <td>Product short name:</td>
+                <td><input type="text" th:field="*{productShortName}"/></td>
             </tr>
             <tr>
                 <td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>
             </tr>
         </table>
+        <!--<p>Counterparty short name: <input type="text" th:field="*{counterpartyShortName}" /></p>
+        <p>Product short name: <input type="text" th:field="*{productShortName}" /></p>-->
         <p><input type="submit" th:value="${btn}"/> <input type="reset" value="Reset"/></p>
-    </form>
 
+    </form>
     <a href="/copro">Home</a>
 </div>
-
 
 <script src="/js/jquery.js"></script>
 <script src="/js/popper.js"></script>

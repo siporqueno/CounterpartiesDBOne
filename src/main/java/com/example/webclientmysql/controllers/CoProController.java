@@ -21,7 +21,7 @@ public class CoProController {
 
     @GetMapping(path = "/add") // Map ONLY GET Requests
     public @ResponseBody
-    String addNewCounterpartyProduct(@RequestParam String counterpartyShortName, @RequestParam String productShortName,
+    String addNewCounterpartyProduct(@RequestParam int counterpartyId, @RequestParam String productShortName,
                                      @RequestParam boolean isBuyer, @RequestParam boolean isSeller,
                                      @RequestParam boolean isConsumer, @RequestParam boolean isProducer,
                                      @RequestParam String quantity) {
@@ -29,7 +29,7 @@ public class CoProController {
         // @RequestParam means it is a parameter from the GET or POST request
 
         CounterpartyProduct cp = new CounterpartyProduct();
-        cp.setCounterpartyShortName(counterpartyShortName);
+        cp.setCounterpartyId(counterpartyId);
         cp.setProductShortName(productShortName);
         cp.setIsBuyer(isBuyer);
         cp.setIsSeller(isSeller);
@@ -52,30 +52,28 @@ public class CoProController {
         model.addAttribute("name", "Kanechno Vasya");
         model.addAttribute("counterpartyproducts", counterpartyProductRepository.findAll());
         model.addAttribute("headerCp", "Here are all the entries in the database:");
-        return "allcounterpartyproducts";
+        return "copro/allcounterpartyproducts";
     }
 
     @GetMapping(value = "/create")
     public String formAddCounterpartyProduct(Model model) {
         model.addAttribute("copro", new CounterpartyProduct());
         model.addAttribute("headerCp", "Form to add Counterparty Product");
-        return "add-cp-through-view";
+        return "copro/add-cp-through-view";
     }
 
     @PostMapping(value = "/show-through-view")
     public String submitCounterpartyProduct(@ModelAttribute CounterpartyProduct counterpartyProduct) {
         counterpartyProduct = counterpartyProductRepository.save(counterpartyProduct);
-        return "redirect:/copro/submitted/" + counterpartyProduct.getCounterpartyShortName() + "/" + counterpartyProduct.getCountryCode() + "/" +
-                counterpartyProduct.getPlace() + "/" + counterpartyProduct.getProductShortName();
+        return "redirect:/copro/submitted/" + counterpartyProduct.getCounterpartyId() + "/" + counterpartyProduct.getProductShortName();
     }
 
-    @GetMapping(value = "/submitted/{co}/{ccode}/{place}/{pro}")
-    public String showSubmittedCounterpartyProduct(ModelMap model, @PathVariable("co") String counterpartyShortName, @PathVariable("ccode") String countryCode,
-                                                   @PathVariable("place") String place, @PathVariable("pro") String productShortName) {
-        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(new CounterpartyProductId(counterpartyShortName, countryCode, place, productShortName)).orElse(new CounterpartyProduct());
+    @GetMapping(value = "/submitted/{coid}/{pro}")
+    public String showSubmittedCounterpartyProduct(ModelMap model, @PathVariable("coid") Integer counterpartyId, @PathVariable("pro") String productShortName) {
+        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(new CounterpartyProductId(counterpartyId, productShortName)).orElse(new CounterpartyProduct());
         model.addAttribute("counterpartyProduct", counterpartyProduct);
         model.addAttribute("headerCp", "The following entry has been successfully added to the database:");
-        return "cp-processed-view";
+        return "copro/cp-processed-view";
     }
 
     @GetMapping(path = "/delete-through-view")
@@ -83,7 +81,7 @@ public class CoProController {
         model.addAttribute("headerCpId", "Form to delete Counterparty Product");
         model.addAttribute("coproId", new CounterpartyProductId());
         model.addAttribute("btn", "Delete");
-        return "do-sth-on-cp-by-cpid-view";
+        return "copro/do-sth-on-cp-by-cpid-view";
     }
 
     @PostMapping(path = "/delete-through-view")
@@ -93,7 +91,7 @@ public class CoProController {
         model.addAttribute("counterpartyProduct", counterpartyProduct);
         model.addAttribute("headerCp", "The following entry has been successfully deleted from the database:");
 //        return "deleted-through-view";
-        return "cp-processed-view";
+        return "copro/cp-processed-view";
 
     }
 
@@ -102,7 +100,7 @@ public class CoProController {
         model.addAttribute("headerCpId", "Form to search Counterparty Product by Counterparty and Product");
         model.addAttribute("coproId", new CounterpartyProductId());
         model.addAttribute("btn", "Search");
-        return "do-sth-on-cp-by-cpid-view";
+        return "copro/find-cp-by-cpid-view";
     }
 
     @PostMapping(path = "/find-copro-by-coproid-view")
@@ -112,7 +110,7 @@ public class CoProController {
         model.addAttribute("counterpartyProduct", counterpartyProduct);
         model.addAttribute("headerCp", "The following entry has been found in the database:");
 //        return "deleted-through-view";
-        return "cp-processed-view";
+        return "copro/cp-processed-view";
     }
 
     @GetMapping(path = "/find-copro-by-co-or-pro-etc-view")
@@ -120,27 +118,27 @@ public class CoProController {
         model.addAttribute("headerCpId", "Form to search Counterparty Product by Counterparty or Product etc.");
         model.addAttribute("coproId", new CounterpartyProductId());
         model.addAttribute("btn", "Search");
-        return "form-to-find-cp-by-co-or-pro-etc";
+        return "copro/form-to-find-cp-by-co-or-pro-etc";
     }
 
     @PostMapping(path = "/find-copro-by-co-or-pro-etc-view")
     public String displayFoundByCoEtc(Model model, @ModelAttribute("coproId") CounterpartyProductId counterpartyProductId, @RequestParam("searchOption") String searchOption) {
-        String counterpartyShortName = counterpartyProductId.getCounterpartyShortName();
+        Integer counterpartyId = counterpartyProductId.getCounterpartyId();
         String productShortName = counterpartyProductId.getProductShortName();
-        System.out.println(counterpartyShortName + "  " + productShortName);
+        System.out.println(counterpartyId + "  " + productShortName);
         List<CounterpartyProduct> counterpartyProducts = new ArrayList<>();
         switch (searchOption) {
-            case "ByCounterparty":
-                counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortName(counterpartyShortName);
+            case "ByCounterpartyId":
+                counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyId(counterpartyId);
                 break;
             case "ByProduct":
                 counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByProductShortName(productShortName);
                 break;
-            case "ByCounterpartyOrProduct":
-                counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortNameOrProductShortName(counterpartyShortName, productShortName);
+            case "ByCounterpartyIdOrProduct":
+                counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyIdOrProductShortName(counterpartyId, productShortName);
                 break;
-            case "ByCounterpartyAndProduct":
-                counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyShortNameAndProductShortName(counterpartyShortName, productShortName);
+            case "ByCounterpartyIdAndProduct":
+                counterpartyProducts = counterpartyProductRepository.findCounterpartyProductsByCounterpartyIdAndProductShortName(counterpartyId, productShortName);
                 break;
             default:
                 System.out.println("Default option in switch");
@@ -150,7 +148,7 @@ public class CoProController {
         model.addAttribute("counterpartyproducts", counterpartyProducts);
         model.addAttribute("headerCp", "Entry(ies) found in the database:");
 //        System.out.println(searchOption);
-        return "allcounterpartyproducts";
+        return "copro/allcounterpartyproducts";
     }
 
     @GetMapping(path = "")

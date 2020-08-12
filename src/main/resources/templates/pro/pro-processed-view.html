@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pro added to the database</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div th:replace="~{navigation :: navigationOne(Pro)}"/>
+<!--    <div th:replace="~{navigation :: navigationThree(Pro)}"/>-->
+
+    <div class="row" style="height: 150px">
+        <div class="col align-self-end">
+            <h2 th:text="${headerPro}">!!!</h2>
+        </div>
+    </div>
+
+<!--    <table border="1">-->
+    <table class="table table-bordered">
+        <tr>
+            <td>Product short name:</td>
+            <td th:text="${product.productShortName}">Short name</td>
+        </tr>
+        <tr>
+            <td>Product full name:</td>
+            <td th:text="${product.productFullName}">Full name</td>
+        </tr>
+    </table>
+
+    <p><a href="/pro/create">Submit another Product</a></p>
+    <p><a href="/pro/delete-through-view">Delete another Product</a></p>
+    <p><a href="/pro/find-pro-by-short-or-full-name-view">Find another Product</a></p>
+    <p><a href="/copro">Home</a></p>
+</div>
+
+<script src="/js/jquery.js"></script>
+<script src="/js/popper.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

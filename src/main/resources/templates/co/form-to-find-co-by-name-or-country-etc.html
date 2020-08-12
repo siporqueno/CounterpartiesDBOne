@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Do sth with Co by CoId</title>
+    <title>Getting Started: Handling Form Submission</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -14,12 +14,16 @@
 
     <div class="row" style="height: 150px">
         <div class="col align-self-end">
-            <h1 th:text="${headerCoId}">!!!</h1>
+            <h1 th:text="${headerCo}">!!!</h1>
         </div>
     </div>
 
-    <form th:object="${coId}" th:action="@{/co/delete-through-view}" method="post">
+    <form th:object="${co}" th:action=@{/co/find-co-by-name-or-country-etc-view} method="post">
         <table>
+            <tr>
+                <td>Counterparty Id:</td>
+                <td><input type="text" th:field="*{id}"/></td>
+            </tr>
             <tr>
                 <td>Counterparty short name:</td>
                 <td><input type="text" th:field="*{counterpartyShortName}"/></td>
@@ -29,19 +33,30 @@
                 <td><input type="text" th:field="*{countryCode}"/></td>
             </tr>
             <tr>
+                <td>Region:</td>
+                <td><input type="text" th:field="*{region}"/></td>
+            </tr>
+            <tr>
                 <td>Place:</td>
                 <td><input type="text" th:field="*{place}"/></td>
             </tr>
-            <tr>
-                <td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>
-            </tr>
         </table>
+        <ul>
+            <li><input type="radio" name="searchOption" value="ById">
+                <label>By Counterpary Id</label></li>
+            <li><input type="radio" name="searchOption" value="ByName">
+                <label>By Counterpary short name</label></li>
+            <li><input type="radio" name="searchOption" value="ByCountry" checked>
+                <label>By Country</label></li>
+            <li><input type="radio" name="searchOption" value="ByRegion">
+                <label>By Region</label></li>
+            <li><input type="radio" name="searchOption" value="ByPlace">
+                <label>By Place</label></li>
+        </ul>
         <p><input type="submit" th:value="${btn}"/> <input type="reset" value="Reset"/></p>
     </form>
-
     <a href="/copro">Home</a>
 </div>
-
 
 <script src="/js/jquery.js"></script>
 <script src="/js/popper.js"></script>

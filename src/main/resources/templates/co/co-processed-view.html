@@ -2,30 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Co added to the database</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 </head>
 <body>
-<h1 th:text="${headerCo}">!!!</h1>
-<table border="1">
-    <tr>
-        <td>Counterparty short name:</td><td th:text="${counterparty.counterpartyShortName}">Name</td>
-    </tr>
-    <tr>
-        <td>Country code:</td><td th:text="${counterparty.countryCode}">Country code</td>
-    </tr>
-    <tr>
-        <td>Region:</td><td th:text="${counterparty.region}">Region</td>
-    </tr>
-    <tr>
-        <td>Place:</td><td th:text="${counterparty.place}">Place</td>
-    </tr>
-</table>
+<div class="container">
+    <div th:replace="~{navigation :: navigationOne(Co)}"/>
+    <!--    <div th:replace="~{navigation :: navigationThree(Co)}"/>-->
+    <div class="row" style="height: 150px">
+        <div class="col align-self-end">
+            <h1 th:text="${headerCo}">!!!</h1>
+        </div>
+    </div>
+    <table border="1">
+        <tr>
+            <td>Counterparty short name:</td>
+            <td th:text="${counterparty.counterpartyShortName}">Name</td>
+        </tr>
+        <tr>
+            <td>Country code:</td>
+            <td th:text="${counterparty.countryCode}">Country code</td>
+        </tr>
+        <tr>
+            <td>Region:</td>
+            <td th:text="${counterparty.region}">Region</td>
+        </tr>
+        <tr>
+            <td>Place:</td>
+            <td th:text="${counterparty.place}">Place</td>
+        </tr>
+    </table>
 
-<p><a href="/co/create">Submit another Counterparty</a></p>
-<p><a href="/co/delete-through-view">Delete another Counterparty</a></p>
-<!--The following link needs to be edited-->
-<p><a href="/co/find-copro-by-coproid-view">Find another Counterparty</a></p>
-<p><a href="/copro">Home</a></p>
+    <p><a href="/co/create">Submit another Counterparty</a></p>
+    <p><a href="/co/delete-through-view">Delete another Counterparty</a></p>
+    <p><a href="/co/find-copro-by-coproid-view">Find another Counterparty</a></p>
+    <p><a href="/copro">Home</a></p>
+</div>
 
+<script src="/js/jquery.js"></script>
+<script src="/js/popper.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
