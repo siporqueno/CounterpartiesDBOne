@@ -21,10 +21,10 @@
 
     <form action="#" th:action="@{/copro/show-through-view}" th:object="${copro}" method="post">
         <p>Counterparty:
-        <select th:field="*{co}">
+        <select th:field="*{counterpartyId}">
             <option th:each="co : ${allCos}"
-                    th:value="${co}"
-                    th:text="${co.counterpartyShortName+':'+co.countryCode+':'+co.place}">
+                    th:value="${co.id}"
+                    th:text="${co.counterpartyShortName+' : '+co.countryCode+' : '+co.place}">
             Wireframe, paragraph 6.5 of Tutorial Thymeleaf+Spring
             </option>
         </select>
