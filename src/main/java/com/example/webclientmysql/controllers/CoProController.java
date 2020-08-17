@@ -4,6 +4,7 @@ import com.example.webclientmysql.entities.CounterpartyProduct;
 import com.example.webclientmysql.entities.CounterpartyProductId;
 import com.example.webclientmysql.repositories.CounterpartyProductRepository;
 import com.example.webclientmysql.repositories.CounterpartyRepository;
+import com.example.webclientmysql.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,8 @@ public class CoProController {
     private CounterpartyProductRepository counterpartyProductRepository;
     @Autowired
     private CounterpartyRepository counterpartyRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
     @GetMapping(path = "/add") // Map ONLY GET Requests
     public @ResponseBody
@@ -85,6 +88,15 @@ public class CoProController {
         model.addAttribute("copro", new CounterpartyProduct());
         model.addAttribute("allCos", counterpartyRepository.findAll());
         return "copro/add-cp-through-view-with-co-select";
+    }
+
+    @GetMapping(value = "/create-with-co-and-pro-select")
+    public String formAddCounterpartyProductWithCoAndProSelect(Model model) {
+        model.addAttribute("headerCp", "Form to add Counterparty Product with Co and Pro select");
+        model.addAttribute("copro", new CounterpartyProduct());
+        model.addAttribute("allCos", counterpartyRepository.findAll());
+        model.addAttribute("allPros", productRepository.findAll());
+        return "copro/add-cp-through-view-with-co-and-pro-select";
     }
 
     @GetMapping(path = "/delete-through-view")
