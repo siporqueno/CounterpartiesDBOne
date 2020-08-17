@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add CoPro</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <!--    <link rel="stylesheet" href="/style.css">-->
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="~{navigation :: navigationOne(CoPro)}"/>
+
+    <div class="row" style="height: 150px">
+        <div class="col align-self-end">
+            <h1 th:text="${headerCp}">!!!</h1>
+        </div>
+    </div>
+
+    <form action="#" th:action="@{/copro/show-through-view}" th:object="${copro}" method="post">
+        <p>Counterparty:
+        <select th:field="*{counterpartyId}">
+            <option th:each="co : ${allCos}"
+                    th:value="${co.id}"
+                    th:text="${co.counterpartyShortName+' : '+co.countryCode+' : '+co.place}">
+            Wireframe, paragraph 6.5 of Tutorial Thymeleaf+Spring
+            </option>
+        </select>
+        </p>
+<!--        <p>Counterparty id: <input type="text" th:field="*{counterpartyId}"/></p>-->
+        <p>Product short name: <input type="text" th:field="*{productShortName}"/></p>
+        <p>Is Buyer?: <input type="checkbox" th:field="*{isBuyer}"/></p>
+        <p>Is Seller?: <input type="checkbox" th:field="*{isSeller}"/></p>
+        <p>Is Consumer?: <input type="checkbox" th:field="*{isConsumer}"/></p>
+        <p>Is Producer?: <input type="checkbox" th:field="*{isProducer}"/></p>
+        <p>Quantity: <input type="text" th:field="*{quantity}"/></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+    <a href="/copro">Home</a>
+</div>
+
+
+<script src="/js/popper.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
