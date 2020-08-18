@@ -14,7 +14,9 @@
     <!--    <div th:replace="~{navigation :: navigationThree(CoPro)}"/>-->
 
     <div class="row" style="height: 100px">
-        <div class="col align-self-end"></div>
+        <div class="col align-self-end">
+            <h1 th:text="${counterpartyproducts.isEmpty()} ? 'Nothing has been found' : ${headerCp}">!!!</h1>
+        </div>
     </div>
 
     <div class="row">
