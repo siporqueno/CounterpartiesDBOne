@@ -18,21 +18,12 @@
     </div>
 
     <!--<form action="#" th:action="@{/demo/${}show-deleted-through-view}" th:object="${coproId}" method="post">-->
-    <form th:object="${coproId}" th:action="@{/copro/delete-through-view}" method="post">
+    <form th:object="${coproId}" th:action="@{/copro/delete-through-view}" th:method="delete">
         <table>
             <tr>
                 <td>Counterparty id:</td>
                 <td><input type="text" th:field="*{counterpartyId}"/></td>
             </tr>
-            <!--<tr>
-                <td>Country code:</td>
-                <td><input type="text" th:field="*{countryCode}"/></td>
-            </tr>-->
-            <!--<tr>
-                <td>Place:</td>
-                <td><input type="text" th:field="*{place}"/></td>
-            </tr>
-            <tr>-->
                 <td>Product short name:</td>
                 <td><input type="text" th:field="*{productShortName}"/></td>
             </tr>
@@ -40,8 +31,6 @@
                 <td><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/></td>
             </tr>
         </table>
-        <!--<p>Counterparty short name: <input type="text" th:field="*{counterpartyShortName}" /></p>
-        <p>Product short name: <input type="text" th:field="*{productShortName}" /></p>-->
         <p><input type="submit" th:value="${btn}"/> <input type="reset" value="Reset"/></p>
 
     </form>

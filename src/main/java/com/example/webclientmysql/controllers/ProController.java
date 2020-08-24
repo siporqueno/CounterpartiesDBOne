@@ -56,7 +56,7 @@ public class ProController {
         return "pro/do-sth-on-pro-by-short-name-view";
     }
 
-    @PostMapping(path = "/delete-through-view")
+    @DeleteMapping(path = "/delete-through-view")
     public String displayProDeletedByShortName(Model model, @ModelAttribute("pro") Product product) {
         String productShortName = product.getProductShortName();
         Product productFound = productRepository.findById(productShortName).orElse(new Product(productShortName, "NotFound"));

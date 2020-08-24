@@ -107,13 +107,12 @@ public class CoProController {
         return "copro/do-sth-on-cp-by-cpid-view";
     }
 
-    @PostMapping(path = "/delete-through-view")
+    @DeleteMapping(path = "/delete-through-view")
     public String displayDeletedById(Model model, @ModelAttribute("coproId") CounterpartyProductId counterpartyProductId) {
         CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
         counterpartyProductRepository.deleteById(counterpartyProductId);
         model.addAttribute("counterpartyProduct", counterpartyProduct);
         model.addAttribute("headerCp", "The following entry has been successfully deleted from the database:");
-//        return "deleted-through-view";
         return "copro/cp-processed-view";
 
     }
