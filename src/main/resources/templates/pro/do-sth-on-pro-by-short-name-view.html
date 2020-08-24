@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="~{navigation :: navigationOne(Co)}"/>
+    <div th:replace="~{navigation :: navigationOne(Pro)}"/>
     <!--    <div th:replace="~{navigation :: navigationThree(Co)}"/>-->
     <div class="row" style="height: 150px">
         <div class="col align-self-end">
@@ -17,10 +17,10 @@
         </div>
     </div>
 
-    <form th:object=${pro} th:action="@{/pro/delete-through-view}" method="post">
+    <form th:object=${pro} th:action="@{/pro/delete-through-view}" th:method="delete">
         <table class="table">
             <tr>
-                <td>Counterparty short name:</td>
+                <td>Product short name:</td>
                 <td><input type="text" th:field="*{productShortName}"/></td>
             </tr>
         </table>

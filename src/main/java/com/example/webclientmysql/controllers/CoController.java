@@ -58,7 +58,7 @@ public class CoController {
         return "co/do-sth-on-co-by-coid-view";
     }
 
-    @PostMapping(path = "/delete-through-view")
+    @DeleteMapping(path = "/delete-through-view")
     public String displayDeletedCoById(Model model, @ModelAttribute("coId") CounterpartyId counterpartyId) {
         Counterparty counterparty = counterpartyRepository
                 .findByCounterpartyShortNameAndCountryCodeAndPlace(counterpartyId.getCounterpartyShortName(),

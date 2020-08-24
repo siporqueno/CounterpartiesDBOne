@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <form th:object="${coId}" th:action="@{/co/delete-through-view}" method="post">
+    <form th:object="${coId}" th:action="@{/co/delete-through-view}" th:method="delete">
         <table>
             <tr>
                 <td>Counterparty short name:</td>
