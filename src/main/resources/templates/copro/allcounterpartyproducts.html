@@ -43,6 +43,9 @@
                     <td th:text="${counterpartyproduct.isConsumer}">Text ...</td>
                     <td th:text="${counterpartyproduct.isProducer}">Text ...</td>
                     <td th:text="${counterpartyproduct.quantity}">Text ...</td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" th:href="@{/copro/{coId}/{pro}(coId = ${counterpartyproduct.counterpartyId}, pro = ${counterpartyproduct.productShortName})}">Delete</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
