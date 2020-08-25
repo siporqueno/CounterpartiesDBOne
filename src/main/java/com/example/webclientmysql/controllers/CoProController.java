@@ -117,6 +117,29 @@ public class CoProController {
 
     }
 
+    //    Start of methods to delete copro from their lists
+    @GetMapping(path = "/{coId}/{pro}")
+    public String displayBeforeDelete(@PathVariable("coId") Integer coId, @PathVariable("pro") String proShortName, Model model) {
+        System.out.println(coId + "  " + proShortName);
+        CounterpartyProductId counterpartyProductId = new CounterpartyProductId(coId, proShortName);
+        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
+//        model.addAttribute("coproId", counterpartyProductId);
+        model.addAttribute("headerCoPro", "The following entry will be permanently deleted from the table of CoPros. Are you sure?");
+        model.addAttribute("copro", counterpartyProduct);
+        return "copro/last-chance-to-survive";
+    }
+
+    @DeleteMapping(path = "/{coId}/{pro}")
+    public String deleteCoPro(@PathVariable("coId") Integer coId, @PathVariable("pro") String proShortName) {
+//        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
+        counterpartyProductRepository.deleteById(new CounterpartyProductId(coId, proShortName));
+//        model.addAttribute("counterpartyProduct", counterpartyProduct);
+//        model.addAttribute("headerCp", "The following entry has been successfully deleted from the database:");
+        return "redirect:/copro/listdata";
+
+    }
+//    End of methods to delete copro from their lists
+
     @GetMapping(path = "/find-copro-by-coproid-view")
     public String formFindById(Model model) {
         model.addAttribute("headerCpId", "Form to search Counterparty Product by Counterparty and Product");
