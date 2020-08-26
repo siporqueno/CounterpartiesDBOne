@@ -117,13 +117,30 @@ public class CoProController {
 
     }
 
+    //    Start of methods to edit copro from their list
+    @GetMapping(path = "/edit-page/{coId}/{pro}")
+    public String displayEditForm(@PathVariable("coId") Integer coId, @PathVariable("pro") String proShortName, Model model) {
+        System.out.println(coId + "  " + proShortName);
+        CounterpartyProductId counterpartyProductId = new CounterpartyProductId(coId, proShortName);
+        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
+        model.addAttribute("headerCoPro", "The following entry will be permanently deleted from the table of CoPros. Are you sure?");
+        model.addAttribute("copro", counterpartyProduct);
+        return "copro/edit-copro-form";
+    }
+
+    @PutMapping(path = "/{coId}/{pro}")
+    public String editCoPro(@PathVariable("coId") Integer coId, @PathVariable("pro") String proShortName) {
+        counterpartyProductRepository.deleteById(new CounterpartyProductId(coId, proShortName));
+        return "redirect:/copro/listdata";
+    }
+    //    End of methods to edit copro from their list
+
     //    Start of methods to delete copro from their lists
-    @GetMapping(path = "/{coId}/{pro}")
+    @GetMapping(path = "/del-page/{coId}/{pro}")
     public String displayBeforeDelete(@PathVariable("coId") Integer coId, @PathVariable("pro") String proShortName, Model model) {
         System.out.println(coId + "  " + proShortName);
         CounterpartyProductId counterpartyProductId = new CounterpartyProductId(coId, proShortName);
         CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
-//        model.addAttribute("coproId", counterpartyProductId);
         model.addAttribute("headerCoPro", "The following entry will be permanently deleted from the table of CoPros. Are you sure?");
         model.addAttribute("copro", counterpartyProduct);
         return "copro/last-chance-to-survive";
@@ -131,14 +148,10 @@ public class CoProController {
 
     @DeleteMapping(path = "/{coId}/{pro}")
     public String deleteCoPro(@PathVariable("coId") Integer coId, @PathVariable("pro") String proShortName) {
-//        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
         counterpartyProductRepository.deleteById(new CounterpartyProductId(coId, proShortName));
-//        model.addAttribute("counterpartyProduct", counterpartyProduct);
-//        model.addAttribute("headerCp", "The following entry has been successfully deleted from the database:");
         return "redirect:/copro/listdata";
-
     }
-//    End of methods to delete copro from their lists
+    //    End of methods to delete copro from their lists
 
     @GetMapping(path = "/find-copro-by-coproid-view")
     public String formFindById(Model model) {
@@ -151,10 +164,8 @@ public class CoProController {
     @PostMapping(path = "/find-copro-by-coproid-view")
     public String displayFoundById(Model model, @ModelAttribute("coproId") CounterpartyProductId counterpartyProductId) {
         CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
-//        counterpartyProductRepository.deleteById(counterpartyProductId);
         model.addAttribute("counterpartyProduct", counterpartyProduct);
         model.addAttribute("headerCp", "The following entry has been found in the database:");
-//        return "deleted-through-view";
         return "copro/cp-processed-view";
     }
 
