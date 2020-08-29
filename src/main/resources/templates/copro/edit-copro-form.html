@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Last chance to survive for CoPro</title>
+    <title>Edit CoPro</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -19,50 +19,47 @@
     </div>
     <div class="row">
         <div class="col">
-            <!--    <table border="1">-->
-            <table class="table table-bordered">
-                <tbody>
-                <tr>
-                    <td>Counterparty:</td>
-                    <td th:text="${copro.co.counterpartyShortName+' : '+copro.co.countryCode+' : '+copro.co.place}">
-                        Counterparty
-                    </td>
-                </tr>
-                <tr>
-                    <td>Product short name:</td>
-                    <td th:text="${copro.productShortName}">Short name</td>
-                </tr>
-                <tr>
-                    <td>Buyer?:</td>
-                    <td th:text="${copro.isBuyer}">Buyer?</td>
-                </tr>
-                <tr>
-                    <td>Seller?:</td>
-                    <td th:text="${copro.isSeller}">Seller?</td>
-                </tr>
-                <tr>
-                    <td>Consumer?:</td>
-                    <td th:text="${copro.isConsumer}">Consumer?</td>
-                </tr>
-                <tr>
-                    <td>Producer?:</td>
-                    <td th:text="${copro.isProducer}">Producer?</td>
-                </tr>
-                <tr>
-                    <td>Quantity:</td>
-                    <td th:text="${copro.quantity}">Quantity</td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col">
-                    <form th:action="@{/copro/{coId}/{pro}(coId = ${copro.counterpartyId}, pro = ${copro.productShortName})}"
-                          th:method="delete">
-                        <button type="submit" class="btn btn-danger">Delete</button> <a class="btn btn-primary" th:href="@{/copro/listdata}">Cancel</a>
-                    </form>
+            <form th:action="@{/copro/}" th:object="${copro}" th:method="put">
+                <!--<p>Counterparty:
+                    <select th:field="*{counterpartyId}">
+                        <option th:each="co : ${allCos}"
+                                th:value="${co.id}"
+                                th:text="${co.counterpartyShortName+' : '+co.countryCode+' : '+co.place}">
+                            Wireframe, paragraph 6.5 of Tutorial Thymeleaf+Spring
+                        </option>
+                    </select>
+                </p>-->
 
-                </div>
-            </div>
+                <p>Counterparty:
+                    <select th:field="*{counterpartyId}">
+                        <option th:each="co : ${allCos}"
+                                th:value="${co.id}"
+                                th:text="${co.counterpartyShortName+' : '+co.countryCode+' : '+co.place}">
+<!--                                th:selected="${copro.counterpartyId==co.id}">-->
+                            Wireframe, paragraph 6.5 of Tutorial Thymeleaf+Spring
+                        </option>
+                    </select>
+                </p>
+
+                <p>Product:
+                    <select th:field="*{productShortName}">
+                        <option th:each="pro : ${allPros}"
+                                th:value="${pro.productShortName}"
+                                th:text="${pro.productShortName+' : '+pro.productFullName}">
+<!--                                th:selected="${copro.productShortName==pro.productShortName}">-->
+                            Wireframe, paragraph 6.5 of Tutorial Thymeleaf+Spring
+                        </option>
+                    </select>
+                </p>
+                <!--        <p>Product short name: <input type="text" th:field="*{productShortName}"/></p>-->
+                <p>Is Buyer?: <input type="checkbox" th:field="*{isBuyer}"/></p>
+                <p>Is Seller?: <input type="checkbox" th:field="*{isSeller}"/></p>
+                <p>Is Consumer?: <input type="checkbox" th:field="*{isConsumer}"/></p>
+                <p>Is Producer?: <input type="checkbox" th:field="*{isProducer}"/></p>
+                <p>Quantity: <input type="text" th:field="*{quantity}"/></p>
+                <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
         </div>
     </div>
 

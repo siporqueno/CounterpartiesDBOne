@@ -25,6 +25,8 @@ public class CoProController {
     @Autowired
     private ProductRepository productRepository;
 
+    private CounterpartyProductId formerCoProId;
+
     @GetMapping(path = "/add") // Map ONLY GET Requests
     public @ResponseBody
     String addNewCounterpartyProduct(@RequestParam int counterpartyId, @RequestParam String productShortName,
@@ -121,16 +123,22 @@ public class CoProController {
     @GetMapping(path = "/edit-page/{coId}/{pro}")
     public String displayEditForm(@PathVariable("coId") Integer coId, @PathVariable("pro") String proShortName, Model model) {
         System.out.println(coId + "  " + proShortName);
-        CounterpartyProductId counterpartyProductId = new CounterpartyProductId(coId, proShortName);
-        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(counterpartyProductId).orElse(new CounterpartyProduct());
-        model.addAttribute("headerCoPro", "The following entry will be permanently deleted from the table of CoPros. Are you sure?");
+        formerCoProId = new CounterpartyProductId(coId, proShortName);
+        CounterpartyProduct counterpartyProduct = counterpartyProductRepository.findById(formerCoProId).orElse(new CounterpartyProduct());
+        model.addAttribute("headerCoPro", "You can now edit the details of CoPro");
         model.addAttribute("copro", counterpartyProduct);
+        model.addAttribute("allCos", counterpartyRepository.findAll());
+        model.addAttribute("allPros", productRepository.findAll());
         return "copro/edit-copro-form";
     }
 
-    @PutMapping(path = "/{coId}/{pro}")
-    public String editCoPro(@PathVariable("coId") Integer coId, @PathVariable("pro") String proShortName) {
-        counterpartyProductRepository.deleteById(new CounterpartyProductId(coId, proShortName));
+    //    @PutMapping(path = "/{coId}/{pro}")
+    @PutMapping(path = "/")
+    public String editCoPro(@ModelAttribute("copro") CounterpartyProduct counterpartyProduct) {
+        System.out.println(formerCoProId.getCounterpartyId() + "  " + formerCoProId.getProductShortName());
+        counterpartyProductRepository.save(counterpartyProduct);
+        if (!formerCoProId.equals(new CounterpartyProductId(counterpartyProduct.getCounterpartyId(), counterpartyProduct.getProductShortName())))
+            counterpartyProductRepository.deleteById(formerCoProId);
         return "redirect:/copro/listdata";
     }
     //    End of methods to edit copro from their list
