@@ -1,37 +1,115 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Edit CoPro</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
 </head>
+
 <body>
-<div class="container">
-    <div th:replace="~{navigation :: navigationOne(CoPro)}"/>
-    <!--    <div th:replace="~{navigation :: navigationThree(Pro)}"/>-->
+    <div class="container">
+        <div th:replace="~{navigation :: navigationOne(CoPro)}" />
+        <!--    <div th:replace="~{navigation :: navigationThree(Pro)}"/>-->
 
-    <div class="row" style="height: 150px">
-        <div class="col align-self-end">
-            <h2 th:text="${headerCoPro}">!!!</h2>
+        <div class="row" style="height: 150px">
+            <div class="col align-self-end">
+                <h2 th:text="${headerCoPro}">!!!</h2>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <form th:action="@{/copro/}" th:object="${copro}" th:method="put">
-                <!--<p>Counterparty:
-                    <select th:field="*{counterpartyId}">
-                        <option th:each="co : ${allCos}"
-                                th:value="${co.id}"
-                                th:text="${co.counterpartyShortName+' : '+co.countryCode+' : '+co.place}">
-                            Wireframe, paragraph 6.5 of Tutorial Thymeleaf+Spring
-                        </option>
-                    </select>
-                </p>-->
+        <div class="row">
+            <div class="col">
+                <form th:action="@{/copro/}" th:object="${copro}" th:method="put">
 
-                <p>Counterparty:
-                    <select th:field="*{counterpartyId}">
+                    <select class="form-control mb-3">
+                    <option>Default select</option>
+                </select>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend w-25">
+                            <label class="input-group-text w-100" for="inputGroupSelect01">Counterparty:</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend w-25">
+                            <label class="input-group-text w-100" for="inputGroupSelect02">Product:</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect02">
+                        <option selected>Choose...</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="w-25">
+                            <label class="input-group-text w-100">Is Buyer ?</label>
+                        </div>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                <label class="form-check-label" for="gridCheck1">
+                                Example checkbox
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">Is Seller ?</div>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck2">
+                                <label class="form-check-label" for="gridCheck2">
+                                Example checkbox
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">Is Consumer ?</div>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck3">
+                                <label class="form-check-label" for="gridCheck3">
+                                Example checkbox
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">Is Producer ?</div>
+                        <div class="col-sm-9">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck4">
+                                <label class="form-check-label" for="gridCheck4">
+                                Example checkbox
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend w-25">
+                            <span class="input-group-text w-100" id="basic-addon1">Quantity:</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+
+                    <p>Counterparty:
+                        <select th:field="*{counterpartyId}">
                         <option th:each="co : ${allCos}"
                                 th:value="${co.id}"
                                 th:text="${co.counterpartyShortName+' : '+co.countryCode+' : '+co.place}">
@@ -39,10 +117,10 @@
                             Wireframe, paragraph 6.5 of Tutorial Thymeleaf+Spring
                         </option>
                     </select>
-                </p>
+                    </p>
 
-                <p>Product:
-                    <select th:field="*{productShortName}">
+                    <p>Product:
+                        <select th:field="*{productShortName}">
                         <option th:each="pro : ${allPros}"
                                 th:value="${pro.productShortName}"
                                 th:text="${pro.productShortName+' : '+pro.productFullName}">
@@ -50,27 +128,28 @@
                             Wireframe, paragraph 6.5 of Tutorial Thymeleaf+Spring
                         </option>
                     </select>
-                </p>
-                <!--        <p>Product short name: <input type="text" th:field="*{productShortName}"/></p>-->
-                <p>Is Buyer?: <input type="checkbox" th:field="*{isBuyer}"/></p>
-                <p>Is Seller?: <input type="checkbox" th:field="*{isSeller}"/></p>
-                <p>Is Consumer?: <input type="checkbox" th:field="*{isConsumer}"/></p>
-                <p>Is Producer?: <input type="checkbox" th:field="*{isProducer}"/></p>
-                <p>Quantity: <input type="text" th:field="*{quantity}"/></p>
-                <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+                    </p>
+                    <!--        <p>Product short name: <input type="text" th:field="*{productShortName}"/></p>-->
+                    <p>Is Buyer?: <input type="checkbox" th:field="*{isBuyer}" /></p>
+                    <p>Is Seller?: <input type="checkbox" th:field="*{isSeller}" /></p>
+                    <p>Is Consumer?: <input type="checkbox" th:field="*{isConsumer}" /></p>
+                    <p>Is Producer?: <input type="checkbox" th:field="*{isProducer}" /></p>
+                    <p>Quantity: <input type="text" th:field="*{quantity}" /></p>
+                    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
         </div>
+
+        <p><a href="/pro/create">Submit another Product</a></p>
+        <p><a href="/pro/delete-through-view">Delete another Product</a></p>
+        <p><a href="/pro/find-pro-by-short-or-full-name-view">Find another Product</a></p>
+        <p><a href="/copro">Home</a></p>
     </div>
 
-    <p><a href="/pro/create">Submit another Product</a></p>
-    <p><a href="/pro/delete-through-view">Delete another Product</a></p>
-    <p><a href="/pro/find-pro-by-short-or-full-name-view">Find another Product</a></p>
-    <p><a href="/copro">Home</a></p>
-</div>
-
-<script src="/js/jquery.js"></script>
-<script src="/js/popper.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/popper.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
+
 </html>
